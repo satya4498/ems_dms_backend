@@ -1,0 +1,608 @@
+[
+  {
+    "id": 29,
+    "name": "1x2 Network",
+    "logo": "https://fungamess.games/images/providers/VYqKL62FaJrJGn5qv6pE4Et9f8UJc83V7knC81aN.svg",
+    "category": 1
+  },
+  {
+    "id": 151,
+    "name": "7Mojos Live",
+    "logo": "https://fungamess.games/images/providers/3hG9A2MlNFJ0QFgmGxHAHdtWN8HJX3YY0gNhYKQ8.svg",
+    "category": 1
+  },
+  {
+    "id": 152,
+    "name": "7Mojos Slots",
+    "logo": "https://fungamess.games/images/providers/K5DHmWGxHQRpLh7nqRDjetPly8SUpx0dDOmmzY32.svg",
+    "category": 1
+  },
+  {
+    "id": 325,
+    "name": "AGTsoftware",
+    "logo": "https://fungamess.games/images/providers/N0j8MeKH7xNJw1fRH6VAb0Mu1bvYHEhjIGqZnvRe.svg",
+    "category": 1
+  },
+  {
+    "id": 324,
+    "name": "AmigoGaming",
+    "logo": "https://fungamess.games/images/providers/BC3T4se2b6TLaNwOm39aVnzSQSeRS4dYFkKdyCxs.svg",
+    "category": 1
+  },
+  {
+    "id": 197,
+    "name": "Apollo",
+    "logo": "https://fungamess.games/images/providers/EuNWTYxIjKuXySFSKQ7S2xVpZa43h3Cc4luqXlMJ.svg",
+    "category": 1
+  },
+  {
+    "id": 348,
+    "name": "Barbara Bang",
+    "logo": "https://fungamess.games/images/providers/WC9rhhitQEQJOlGiI6Ecq0QRozzMbqou4SMhcsE4.svg",
+    "category": 1
+  },
+  {
+    "id": 144,
+    "name": "Betgamestv",
+    "logo": "https://fungamess.games/images/providers/C9v1cEOvFMf92OxfxZ6mZEP6nv2lxYnRUjOAyks6.svg",
+    "category": 1
+  },
+  {
+    "id": 134,
+    "name": "Betsolutions",
+    "logo": "https://fungamess.games/images/providers/vod6CorXkRnUdY02oPCGUitqoFMNXQ13TySCirf9.svg",
+    "category": 1
+  },
+  {
+    "id": 136,
+    "name": "BGaming",
+    "logo": "https://fungamess.games/images/providers/qmFIS44heGyN9Casvn0yhAeL3HNgr0OOoUzdWQgA.svg",
+    "category": 1
+  },
+  {
+    "id": 209,
+    "name": "Big Time Gaming",
+    "logo": "https://fungamess.games/images/providers/SnCXv0RYz5vY58b6owwIcA3VNtEwULWfZdzNBPIS.svg",
+    "category": 1
+  },
+  {
+    "id": 74,
+    "name": "Blueprint Gaming",
+    "logo": "https://fungamess.games/images/providers/quuDxRoRnsp7l6eQDQC4V6VZ9ujG7v9ccXwppEic.svg",
+    "category": 1
+  },
+  {
+    "id": 317,
+    "name": "Booongo",
+    "logo": "https://fungamess.games/images/providers/TNfs6yrWnCfWhyQv2KPc1QZA7bINnEFTUS7qrA5z.svg",
+    "category": 1
+  },
+  {
+    "id": 117,
+    "name": "Caleta Gaming",
+    "logo": "https://fungamess.games/images/providers/quV8CHNiPofmhnto7riMlS0B1BRhB3FgczqT7djB.svg",
+    "category": 1
+  },
+  {
+    "id": 160,
+    "name": "Cool Games",
+    "logo": "https://fungamess.games/images/providers/ecpJxu0vI5DYfur4NnMJlAI5xChQkF2QGleK6szg.svg",
+    "category": 1
+  },
+  {
+    "id": 205,
+    "name": "CQ9 Casino",
+    "logo": "https://fungamess.games/images/providers/0HEQhWX1b5YpHmHtGgrZpX52wZ3sjDkumefNfEz5.svg",
+    "category": 1
+  },
+  {
+    "id": 301,
+    "name": "CT Interactive",
+    "logo": "https://fungamess.games/images/providers/JEGflLSLwfWAGHyF3xBqmWFEnWOMbq5c3Qjmmrj2.svg",
+    "category": 1
+  },
+  {
+    "id": 330,
+    "name": "Digitain",
+    "logo": "https://fungamess.games/images/providers/xCNo45MGawin0JzO2GzVJ39WnIzbotr1G3jUpU2H.svg",
+    "category": 1
+  },
+  {
+    "id": 88,
+    "name": "Dragoon Soft",
+    "logo": "https://fungamess.games/images/providers/ZNPyFvytk07HAKM6rM2reQce8JzrWDtE660MEpCu.svg",
+    "category": 1
+  },
+  {
+    "id": 326,
+    "name": "Elbet",
+    "logo": "https://fungamess.games/images/providers/gvxz3e32SmSYwGi0j48wlXhnQtcrp53eifMcA75A.svg",
+    "category": 1
+  },
+  {
+    "id": 105,
+    "name": "Elk Studios",
+    "logo": "https://fungamess.games/images/providers/PldWzSNUd6vEzIJFUMaYOhtDJ4ULn6jUl53QNWcr.svg",
+    "category": 1
+  },
+  {
+    "id": 19,
+    "name": "Endorphina",
+    "logo": "https://fungamess.games/images/providers/s5dOICjFJYxdtrP5HMBw4YpulTMymcq5FDpiZgeX.svg",
+    "category": 1
+  },
+  {
+    "id": 329,
+    "name": "Espresso",
+    "logo": "https://fungamess.games/images/providers/f2JLvguF9LZuh0pBJazLdeNRbiugGuKjhEBcqUub.svg",
+    "category": 1
+  },
+  {
+    "id": 252,
+    "name": "EURASIAN Gaming",
+    "logo": "https://fungamess.games/images/providers/Mld9mVN5U5QoShzc0YJrQTUY87rb8lPHBruNDWnK.svg",
+    "category": 1
+  },
+  {
+    "id": 122,
+    "name": "Evolution",
+    "logo": "https://fungamess.games/images/providers/RuNv0sd2ELYitEDPYWaeKavmtG73OJvZZz3GDyjC.svg",
+    "category": 1
+  },
+  {
+    "id": 127,
+    "name": "Evolution premium",
+    "logo": "https://fungamess.games/images/providers/WOwWPKSTVVkN7BhpJ3UShZHCTKjR9waqCmlooaCo.svg",
+    "category": 1
+  },
+  {
+    "id": 103,
+    "name": "Evoplay",
+    "logo": "https://fungamess.games/images/providers/L2yfQB8E0fQ2JtFh0ZFqdIX12s2vheqZOl2GBmWR.svg",
+    "category": 1
+  },
+  {
+    "id": 1,
+    "name": "Ezugi",
+    "logo": "https://fungamess.games/images/providers/LdHMypVM2xs2blLDT7exepIbbci4lLgXvRN0E7ti.png",
+    "category": 1
+  },
+  {
+    "id": 126,
+    "name": "Ezugi premium",
+    "logo": "https://fungamess.games/images/providers/n4gP6WyKbhTJNKq3kSQVtlf1qcOiBxbZZCt2ApWi.png",
+    "category": 1
+  },
+  {
+    "id": 85,
+    "name": "Fantasma Games",
+    "logo": "https://fungamess.games/images/providers/eJIw3pB9rVfQbvjEkoPnsUKAB5iI8P2bbHmKzrZk.svg",
+    "category": 1
+  },
+  {
+    "id": 297,
+    "name": "Fast Games by Galaxsys",
+    "logo": "https://fungamess.games/images/providers/H2IypOwG7TrLgrxrww54I8WUD4MQE0r1YngvXmx0.svg",
+    "category": 1
+  },
+  {
+    "id": 138,
+    "name": "Fazi",
+    "logo": "https://fungamess.games/images/providers/5EnI0m1Hl1hzcEsjAfE4Dy7PHxfX79by56Uq7FQZ.svg",
+    "category": 1
+  },
+  {
+    "id": 333,
+    "name": "FCGame",
+    "logo": "https://fungamess.games/images/providers/MNbjvBs1mAgiuvmwlXMt1P3BCMr5nfeoWT0W5UjJ.svg",
+    "category": 1
+  },
+  {
+    "id": 145,
+    "name": "Felix",
+    "logo": "https://fungamess.games/images/providers/EsQMMy8UpY48vgGym1WGkttrYtyNewTaNTSqPHn6.svg",
+    "category": 1
+  },
+  {
+    "id": 154,
+    "name": "Fugaso",
+    "logo": "https://fungamess.games/images/providers/MCFxn68KFIo8tGHhI3haGPFklJTFqAu5Eo1XiyO5.svg",
+    "category": 1
+  },
+  {
+    "id": 158,
+    "name": "Funky Games",
+    "logo": "https://fungamess.games/images/providers/WzMq71RlO0DsgrToPyd2SXBioHys6Dm6TsFb849b.svg",
+    "category": 1
+  },
+  {
+    "id": 149,
+    "name": "FunTa Gaming",
+    "logo": "https://fungamess.games/images/providers/B23FalTrvaHewaDJi1oCxK1OlOm6jkSOLmRuV85a.svg",
+    "category": 1
+  },
+  {
+    "id": 26,
+    "name": "GameArt",
+    "logo": "https://fungamess.games/images/providers/Ew0Y0u6kScnwjqiYgcbqZbV9y9NuDpFU7wtJdlC4.svg",
+    "category": 1
+  },
+  {
+    "id": 143,
+    "name": "Games Inc",
+    "logo": "https://fungamess.games/images/providers/DRVPJShNC4IwOjXp9laeeN0cZLyXj2mmuThSVQiE.svg",
+    "category": 1
+  },
+  {
+    "id": 118,
+    "name": "Gamzix",
+    "logo": "https://fungamess.games/images/providers/42iOWNVWMYL67YEAZxgjFrAj53OUOWONMdAd6lIg.svg",
+    "category": 1
+  },
+  {
+    "id": 7,
+    "name": "GoldenRace",
+    "logo": "https://fungamess.games/images/providers/8cTGN5dQdDp79NLI8btyblsY2jPspnYGhmj5aWKq.svg",
+    "category": 1
+  },
+  {
+    "id": 21,
+    "name": "Habanero",
+    "logo": "https://fungamess.games/images/providers/rDYBh1rTEvyNBWQ39lvD2SivQBGQn67UrSYHmR0e.svg",
+    "category": 1
+  },
+  {
+    "id": 331,
+    "name": "Imagine Live",
+    "logo": "https://fungamess.games/images/providers/ieYVAkJbCJawd5Va5DzkzII5IsWGoNbRcMai2rwf.svg",
+    "category": 1
+  },
+  {
+    "id": 59,
+    "name": "IronDogStudio",
+    "logo": "https://fungamess.games/images/providers/yhhL56GDmURJwGCeaob57wQtSIOVwUVQg0wt9KEG.svg",
+    "category": 1
+  },
+  {
+    "id": 288,
+    "name": "Jili",
+    "logo": "https://fungamess.games/images/providers/P0cDazQwihs84xD1qk6EujJJWMVVQAUMKeQ3Pwjb.svg",
+    "category": 1
+  },
+  {
+    "id": 106,
+    "name": "Ka Gaming",
+    "logo": "https://fungamess.games/images/providers/CZkCoUYZurUaoWTRTUn3nIbQnOvh8oTF2oaqIdlh.svg",
+    "category": 1
+  },
+  {
+    "id": 75,
+    "name": "Kalamba Games",
+    "logo": "https://fungamess.games/images/providers/lJmrMirkJ6aztetuq4KKuRKEuWdHcHjPj9KrdW1i.svg",
+    "category": 1
+  },
+  {
+    "id": 84,
+    "name": "Kiron Interactive",
+    "logo": "https://fungamess.games/images/providers/3DdubLjb24MsdFKH4qJCYVUzwnvWhJObNc2tU1iT.svg",
+    "category": 1
+  },
+  {
+    "id": 67,
+    "name": "LEAP",
+    "logo": "https://fungamess.games/images/providers/QbBhLlc9jbTSvLN3y7dWCjqJwVa2dttOFiYU7aec.svg",
+    "category": 1
+  },
+  {
+    "id": 61,
+    "name": "Lucky Streak",
+    "logo": "https://fungamess.games/images/providers/7FwsD5IX6M1aLY2CaVmbiFRqqN76A1SD7IKZ0YWR.svg",
+    "category": 1
+  },
+  {
+    "id": 159,
+    "name": "Mancala",
+    "logo": "https://fungamess.games/images/providers/Jss7iJyhemKffRJmqccaLLSsR5NCU0KuCjIPNzEM.svg",
+    "category": 1
+  },
+  {
+    "id": 102,
+    "name": "Mascot Gaming",
+    "logo": "https://fungamess.games/images/providers/GySfR0B9HIiHEDecKeHfmt2sUpwfem6vS9atUNBT.svg",
+    "category": 1
+  },
+  {
+    "id": 244,
+    "name": "Microgaming",
+    "logo": "https://fungamess.games/images/providers/9fEscY7ZHxxYJ4Edvu9nvzjIe3nHnjIan8dcAQgK.svg",
+    "category": 1
+  },
+  {
+    "id": 41,
+    "name": "Mobilots",
+    "logo": "https://fungamess.games/images/providers/Ge0nxqRMfiM0OJc4UeL8p1CfFAq1fzwbtXuknBKd.svg",
+    "category": 1
+  },
+  {
+    "id": 132,
+    "name": "MrSlotty",
+    "logo": "https://fungamess.games/images/providers/69EZLe7mjHFHCPaqGrQvMvQT22g5jhgPHqJwArhR.svg",
+    "category": 1
+  },
+  {
+    "id": 92,
+    "name": "NetEnt",
+    "logo": "https://fungamess.games/images/providers/U8Mf3dQqxty8pmzLGC7FmNLLeIkpMTHIJ1On6SgM.svg",
+    "category": 1
+  },
+  {
+    "id": 141,
+    "name": "Netgame",
+    "logo": "https://fungamess.games/images/providers/zIEyMcOOpfZDeF0g7DjM2a6ZJmSPLGaM493Jfoei.svg",
+    "category": 1
+  },
+  {
+    "id": 148,
+    "name": "NetGaming",
+    "logo": "https://fungamess.games/images/providers/OCZF3HQzHqQbG9VXt3vUTm44lzYTxfVTy2SGVvSM.svg",
+    "category": 1
+  },
+  {
+    "id": 79,
+    "name": "Nolimit city",
+    "logo": "https://fungamess.games/images/providers/MOJQUcVobGRDRey3GKWnKvIm2ud25NQoWsWN07mC.svg",
+    "category": 1
+  },
+  {
+    "id": 16,
+    "name": "NuxGame",
+    "logo": "https://fungamess.games/images/providers/3l9v60VAGw5W8VL00IlvfVXZRe2YzNb6y3f5ReGq.jpeg",
+    "category": 1
+  },
+  {
+    "id": 86,
+    "name": "OMI Gaming",
+    "logo": "https://fungamess.games/images/providers/3MkOYDZywZHJP4koaFZsojEFAsXiQf39tAs6eVZB.svg",
+    "category": 1
+  },
+  {
+    "id": 43,
+    "name": "OneTouch",
+    "logo": "https://fungamess.games/images/providers/23l5vWoBAyC61EB0rpHAls0p6FiLLtl3219hyVm7.svg",
+    "category": 1
+  },
+  {
+    "id": 313,
+    "name": "OnlyPlay",
+    "logo": "https://fungamess.games/images/providers/c6kDreG7A9J1c200ZtG7OzuBz2aOdxVSYb6H7S8x.svg",
+    "category": 1
+  },
+  {
+    "id": 358,
+    "name": "PGSoft",
+    "logo": "https://fungamess.games/images/providers/2j75EHUiGIIy6HAXbpF6fILc3ZQgbkw8NJ3aBDFw.svg",
+    "category": 1
+  },
+  {
+    "id": 116,
+    "name": "Platipus",
+    "logo": "https://fungamess.games/images/providers/QCH5pyzDmsNCnV0lUPFK3O3pFMCszUiuHXQexu1Z.svg",
+    "category": 1
+  },
+  {
+    "id": 318,
+    "name": "Playson",
+    "logo": "https://fungamess.games/images/providers/NKfeI7WJdsGrfRqtRJABKblZKMrnwEvFrMq1AZpT.svg",
+    "category": 1
+  },
+  {
+    "id": 22,
+    "name": "Pragmatic",
+    "logo": "https://fungamess.games/images/providers/6R0ANNUDI0lxpa8X24JnaWmiwETOph6XhNEig2Ip.svg",
+    "category": 1
+  },
+  {
+    "id": 129,
+    "name": "Pragmatic live",
+    "logo": "https://fungamess.games/images/providers/irehVGfl0vfejaAlYDhcv6CgPimPATT4QXqXCqDx.svg",
+    "category": 1
+  },
+  {
+    "id": 379,
+    "name": "Pragmatic Tournaments",
+    "logo": "https://fungamess.games/images/providers/RHpRXTfTwxnDWFd6i4vrt7bqef4EJEoIeo6LohBl.svg",
+    "category": 1
+  },
+  {
+    "id": 125,
+    "name": "Print Studios",
+    "logo": "https://fungamess.games/images/providers/vug36kMxcjDUDP1N2IcI49MYkvQt201hT9qHVQDe.svg",
+    "category": 1
+  },
+  {
+    "id": 98,
+    "name": "Quick spin",
+    "logo": "https://fungamess.games/images/providers/fxXdIBaOSQKtwbwtWxJBy07MNngA9stYcCiSCT92.svg",
+    "category": 1
+  },
+  {
+    "id": 76,
+    "name": "Realtime Gaming",
+    "logo": "https://fungamess.games/images/providers/DIyAO0IjoTgx3ImrqVemtZa8bhDVUDEQ4mfT7ZP6.svg",
+    "category": 1
+  },
+  {
+    "id": 89,
+    "name": "Red Tiger",
+    "logo": "https://fungamess.games/images/providers/6L7dcpMILOixS7papFxiO17KwCSKAGr3MWtx2mJc.svg",
+    "category": 1
+  },
+  {
+    "id": 66,
+    "name": "RedRake",
+    "logo": "https://fungamess.games/images/providers/NyWY3EEzk923NJzamsEsvpDXcU5yisRckW67zYNn.svg",
+    "category": 1
+  },
+  {
+    "id": 120,
+    "name": "Revolver Gaming",
+    "logo": "https://fungamess.games/images/providers/LLGSbFuYO9ZfRIB0iHB2HSBoFoyPIv2VJMvO2HrX.svg",
+    "category": 1
+  },
+  {
+    "id": 328,
+    "name": "RubyPlay",
+    "logo": "https://fungamess.games/images/providers/urwixRKRclpEjJM6GqoH1YL1uBBPmAu6zQl0iORc.svg",
+    "category": 1
+  },
+  {
+    "id": 298,
+    "name": "Skill Games by Galaxsys",
+    "logo": "https://fungamess.games/images/providers/4vYEyRtUQq95N0Fz13ItkmVL8ijaJrZJXLki3T4Y.svg",
+    "category": 1
+  },
+  {
+    "id": 96,
+    "name": "Skywind Casino",
+    "logo": "https://fungamess.games/images/providers/SvuVcKs1kG9WmHjCtWEvOH27TZgl0Zmo197DyTZn.svg",
+    "category": 1
+  },
+  {
+    "id": 208,
+    "name": "Skywind Live",
+    "logo": "https://fungamess.games/images/providers/bDI2j8D3C8f6p81lYPMcyXFiFE17lD9OR8DqhpFE.svg",
+    "category": 1
+  },
+  {
+    "id": 51,
+    "name": "Slotmill",
+    "logo": "https://fungamess.games/images/providers/jZzc3K2QRlaXliY9SyiNY8rgolZKAcIUJxOzvRg2.svg",
+    "category": 1
+  },
+  {
+    "id": 58,
+    "name": "SmartSoft",
+    "logo": "https://fungamess.games/images/providers/UOlngYheHq7DGYGdfyxkEhFfHjtA8LkpVaks1YSY.svg",
+    "category": 1
+  },
+  {
+    "id": 77,
+    "name": "Spearhead Studios",
+    "logo": "https://fungamess.games/images/providers/guBe4utvZBW8Y4DCvJEs3niBo4UDmtakq4xuQW2s.svg",
+    "category": 1
+  },
+  {
+    "id": 314,
+    "name": "Spinberry",
+    "logo": "https://fungamess.games/images/providers/Zxd9COIizNWTfJPYtqS2F545Bn5nvVQ1uT4tti96.svg",
+    "category": 1
+  },
+  {
+    "id": 8,
+    "name": "Spinmatic",
+    "logo": "https://fungamess.games/images/providers/lHd9yrVAnv3nWHUuXBmr2pmQJuH0jjdSLPhV9bsx.svg",
+    "category": 1
+  },
+  {
+    "id": 161,
+    "name": "Spinthon",
+    "logo": "https://fungamess.games/images/providers/vbvQbZfYC2VbZaQdRmroeuYvQHx0qDTWkug3VDDe.svg",
+    "category": 1
+  },
+  {
+    "id": 320,
+    "name": "Spribe",
+    "logo": "https://fungamess.games/images/providers/seWuD4RkhferbznETjEkpPpiYXvJNhIW5ePEe4NV.svg",
+    "category": 1
+  },
+  {
+    "id": 54,
+    "name": "Thunderkick",
+    "logo": "https://fungamess.games/images/providers/TOccArF6HecOqvaFAGTbG2O2mecEu3Z7guNmPiZt.svg",
+    "category": 1
+  },
+  {
+    "id": 23,
+    "name": "Tom Horn",
+    "logo": "https://fungamess.games/images/providers/Ju1srqLBSbpv5EB0H6J1O6JNGyz2TqWFPAVt6f8G.svg",
+    "category": 1
+  },
+  {
+    "id": 139,
+    "name": "Tpg",
+    "logo": "https://fungamess.games/images/providers/fawK6zGTcGagTkqEeC1QFDABf1MPRmxoVlqMm4VC.svg",
+    "category": 1
+  },
+  {
+    "id": 30,
+    "name": "Triplecherry",
+    "logo": "https://fungamess.games/images/providers/axp5xdnuMVoIgOTnL2gvMTo7PRC57liTDHs9rePc.svg",
+    "category": 1
+  },
+  {
+    "id": 133,
+    "name": "TrueLab",
+    "logo": "https://fungamess.games/images/providers/rvdOhXwOiV6Z5bntiVdJoeBGJnZxo6ha6MtFP1Ap.svg",
+    "category": 1
+  },
+  {
+    "id": 321,
+    "name": "TurboGames",
+    "logo": "https://fungamess.games/images/providers/WW6DF78nNkBjj0KP2k3QqQMqCbQ6426kmRn3ztwT.svg",
+    "category": 1
+  },
+  {
+    "id": 2,
+    "name": "TvBet",
+    "logo": "https://fungamess.games/images/providers/QNrM2fGEmm6JE4RnGJgbuZ480tvPjQZpAjCooRx2.svg",
+    "category": 1
+  },
+  {
+    "id": 142,
+    "name": "Virtual Generation",
+    "logo": "https://fungamess.games/images/providers/39ioJeEVBafH5EF1zjHUiHRNEaL8aq95ymtH1G04.svg",
+    "category": 1
+  },
+  {
+    "id": 28,
+    "name": "Vivo",
+    "logo": "https://fungamess.games/images/providers/I718iCccXTIxzZhzTtPpCTj0YsbFrqSFwjP1RwY1.svg",
+    "category": 1
+  },
+  {
+    "id": 121,
+    "name": "Wazdan",
+    "logo": "https://fungamess.games/images/providers/u1HS4G6TSMEbf85DG0x8Vf3y8fHRJp9DiOix3Mck.svg",
+    "category": 1
+  },
+  {
+    "id": 20,
+    "name": "Wizard Games",
+    "logo": "https://fungamess.games/images/providers/8OIwBYoHTGgFBxmO6cKIcXbZ6bh5ily56bcuZfdM.svg",
+    "category": 1
+  },
+  {
+    "id": 104,
+    "name": "Woohoo Games",
+    "logo": "https://fungamess.games/images/providers/hbQTaSrdM3jy1Ejzpxmn98MfRSEEYcpkGhOkyHze.svg",
+    "category": 1
+  },
+  {
+    "id": 163,
+    "name": "Xpg",
+    "logo": "https://fungamess.games/images/providers/H80xsghBP1v1h4yGwTmN2v9zWWkIUNir5ABGs1n4.svg",
+    "category": 1
+  },
+  {
+    "id": 56,
+    "name": "Yggdrasil",
+    "logo": "https://fungamess.games/images/providers/tWVE9iFdAosUKYIKldWWj93SZ8N1MmKuYDQNgKRt.svg",
+    "category": 1
+  },
+  {
+    "id": 349,
+    "name": "ZeusPlay",
+    "logo": "https://fungamess.games/images/providers/USwdnSMbdSaRx0oD7hLt79nHGPvNXF63Yur12uas.svg",
+    "category": 1
+  }
+]

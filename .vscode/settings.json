@@ -1,0 +1,120 @@
+{
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+  "workbench.statusBar.visible": true,
+  "workbench.sideBar.location": "left",
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "standard.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    }
+  ],
+  "standard.options": {
+    "parser": "@babel/eslint-parser",
+    "env": {
+      "jest": true,
+      "browser": true,
+      "node": true
+    },
+    "globals": [
+      "artifacts",
+      "tronWeb",
+      "contract",
+      "before",
+      "assert",
+      "after"
+    ]
+  },
+  "standard.enable": true,
+  "standard.autoFixOnSave": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": false,
+  "editor.renderFinalNewline": "on",
+  "editor.rulers": [
+    120
+  ],
+  "editor.multiCursorModifier": "alt",
+  "editor.autoIndent": "full",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "breadcrumbs.enabled": true,
+  "cSpell.words": [
+    "middlewares",
+    "superadmin",
+    "superadmins"
+  ],
+  "todo-tree.regex.enableMultiLine": true,
+  "todo-tree.regex.regex": "((//|#|;|\\*)[ ]*($TAGS)[^\\n]*)|(/\\*(\\*?\\s*)*($TAGS)(.|\\n|\\r)*?\\*/)|(<!--\\s*($TAGS)(.|\\n|\\r)*?-->)",
+  "todo-tree.highlights.customHighlight": {
+    "ALERT": {
+      "icon": "alert",
+      "foreground": "#d82d2d",
+      "iconColour": "#d82d2d",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "type": "line",
+      "background": "#000000",
+      "fontWeight": "bold"
+    },
+    "TODO": {
+      "icon": "checklist",
+      "foreground": "#c99812",
+      "iconColour": "#c99812",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "type": "line",
+      "background": "#000000",
+      "fontWeight": "bold"
+    },
+    "NOTE": {
+      "icon": "note",
+      "foreground": "#2d94d8",
+      "iconColour": "#2d94d8",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "type": "line",
+      "background": "#000000",
+      "fontWeight": "bold"
+    },
+    "WARNING": {
+      "icon": "bell",
+      "foreground": "#FFA500",
+      "iconColour": "#e99802",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "type": "line",
+      "background": "#000000",
+      "fontWeight": "bold"
+    },
+    "INFO": {
+      "icon": "info",
+      "foreground": "#6f9131",
+      "iconColour": "#6f9131",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "background": "#000000",
+      "type": "line",
+      "fontWeight": "bold"
+    }
+  },
+  "todo-tree.general.tags": [
+    "ALERT",
+    "TODO",
+    "NOTE",
+    "WARNING",
+    "INFO"
+  ]
+}

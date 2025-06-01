@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Welcome</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Jura:wght@500&family=Roboto:wght@100;300;400;500;700;900&family=Style+Script&display=swap">
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <table border="0"
+    style="width: 600px; background-color: #0B195C; font-family: 'Roboto', sans-serif; color: #ffffff; line-height: 1.4; margin: 15px auto;">
+    <tbody>
+      <tr>
+        <td style="padding: 20px;">
+          <img src={{{siteLogo}}} style="width: 100px; display: block; margin: auto;" alt="img">
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <div style="min-height: 260px; margin-top: 40px; align-items: center; padding: 20px;">
+            <h6
+              style="font-size: 28px; font-weight: 900; letter-spacing: 1.5px; text-align: center; margin-bottom: 35px;">
+              <span style="color: #68E752; display: block;">Welcome {{{userName}}}</span>
+            </h6>
+            <h3 style="color: #ffffff; text-align: left; padding-bottom: 10px;">Hello {{{playerFullName}}}</h3>
+            <p style="color: #ffffff; letter-spacing: .5px; text-align: left;">Money won is twice as sweet as money
+              earned. Start your Gambling journey with us and win exciting rewards.</p>
+            <a style="color: #ffffff;" target="_blank" href={{{siteLoginUrl}}}>
+              <button type="button"
+                style="min-width: 275px; background-color: transparent; border: 3px solid #ffffff; border-radius: 36px; color: #ffffff; font-size: 22px; margin-top: 50px; font-weight: 700; letter-spacing: .5px; cursor: pointer; padding: 12px 30px;">
+                Get Started</button></a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 15px 20px 15px;">
+          <p style="color: #ffffff; font-size: 15px; font-weight: 900; letter-spacing: .5px; text-align: center;">@2023
+            {{{siteName}}}</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
