@@ -358,6 +358,32 @@ const config = convict({
       default: '',
       env: 'APPROVELY_URL'
     }
+  },
+  twilio: {
+    accountSid: {
+      doc: 'Twilio Account SID',
+      format: String,
+      default: '',
+      env: 'TWILIO_ACCOUNT_SID'
+    },
+    authToken: {
+      doc: 'Twilio Auth Token',
+      format: String,
+      default: '',
+      env: 'TWILIO_AUTH_TOKEN'
+    },
+    serviceSid: {
+      doc: 'Twilio Service SID',
+      format: String,
+      default: '',
+      env: 'TWILIO_SERVICE_SID'
+    },
+    phoneNumber: {
+      doc: 'Twilio Phone Number',
+      format: String,
+      default: '',
+      env: 'TWILIO_PHONE_NUMBER'
+    }
   }
 })
 config.validate({ allowed: 'strict' })

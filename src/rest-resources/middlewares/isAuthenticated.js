@@ -3,14 +3,12 @@ import AuthenticationError from '@src/errors/authentication.error'
 import { JWT_TOKEN_TYPES } from '@src/utils/constants/app.constants'
 import { errorTypes } from '@src/utils/constants/error.constants'
 import Jwt from 'jsonwebtoken'
-import { PERMISSION_LEVELS_INVERTED } from '@src/utils/constants/permission.constant'
 
 /**
  * @param {string} permission
  * @returns {import('express').RequestHandler}
  */
-export function isAuthenticated (permission) {
-  const [resource, permissionLevel] = permission?.split(':') || [null, null]
+export function isAuthenticated (role) {
   return async function (req, _, next) {
     try {
       const accessToken = req.headers.authorization.split('Bearer ')[1]
@@ -23,18 +21,21 @@ export function isAuthenticated (permission) {
       // const tokenObject = await Cache.get(`admin:${decodedToken.adminUserId}`)
       // if(!tokenObject || tokenObject.token!==accessToken) return next(new AuthenticationError(errorTypes.AuthenticationErrorType))
 
-      if (permission && !decodedToken?.permissions[resource]?.includes(permissionLevel)) return next(new AuthenticationError(errorTypes.NotEnoughPermissionErrorType))
+      if (role && !decodedToken?.permission === role) return next(new AuthenticationError(errorTypes.NotEnoughPermissionErrorType))
 
       req.authenticated = {
-        adminUserId: decodedToken.adminUserId,
-        adminUserName: decodedToken?.adminUserName,
-        adminEmail: decodedToken?.adminEmail
+        userId: decodedToken.userId,
+        phone: decodedToken?.phone,
+        role: decodedToken?.role,
+        phoneCode: decodedToken?.phoneCode,
+        isNewUser: decodedToken?.isNewUser,
+        type: decodedToken?.type
       }
 
       // will be used for activity logs
       req.modulePermission = {
-        module: resource,
-        permission: PERMISSION_LEVELS_INVERTED[permissionLevel]
+        permission: true,
+        role: decodedToken?.role
       }
       next()
     } catch (error) {

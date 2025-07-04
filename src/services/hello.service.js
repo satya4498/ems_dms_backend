@@ -18,10 +18,10 @@ export class HelloService extends ServiceBase {
 
   async run () {
     try {
-      this.addError('RequestInputValidationErrorType', 'shivam1')
-      this.addError('InvalidSocketArgumentErrorType', 'shivam2')
-      // throw 'shivam'
-      return { name: 'shivam' }
+      this.addError('RequestInputValidationErrorType', 'satyam1')
+      this.addError('InvalidSocketArgumentErrorType', 'satyam2')
+      // throw 'satyam'
+      return { name: 'satyam' }
     } catch (error) {
       throw new APIError(error)
     }

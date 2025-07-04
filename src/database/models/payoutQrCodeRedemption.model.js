@@ -1,15 +1,15 @@
 import { DataTypes } from 'sequelize'
 import ModelBase from './modelBase.model'
 
-export default class Wallet extends ModelBase {
-  static model = 'wallet'
+export default class PayoutQrCodeRedemption extends ModelBase {
+  static model = 'payoutQrCodeRedemption'
 
-  static table = 'wallets'
+  static table = 'payout_qr_code_redemptions'
 
   static options = {
     name: {
-      singular: 'wallet',
-      plural: 'wallets'
+      singular: 'payoutQrCodeRedemption',
+      plural: 'payoutQrCodeRedemptions'
     }
   }
 
@@ -20,6 +20,14 @@ export default class Wallet extends ModelBase {
       allowNull: false,
       primaryKey: true
     },
+    qrCodeId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'payout_qr_codes',
+        key: 'id'
+      }
+    },
     userId: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -28,18 +36,9 @@ export default class Wallet extends ModelBase {
         key: 'id'
       }
     },
-    currencyId: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: 'currencies',
-        key: 'id'
-      }
-    },
-    balance: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 0
+    redeemedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -52,8 +51,8 @@ export default class Wallet extends ModelBase {
   }
 
   static associate (models) {
+    this.belongsTo(models.payoutQrCode, { foreignKey: 'qrCodeId' })
     this.belongsTo(models.user, { foreignKey: 'userId' })
-    this.belongsTo(models.currency, { foreignKey: 'currencyId' })
     super.associate()
   }
 }

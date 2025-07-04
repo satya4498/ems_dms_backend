@@ -198,7 +198,10 @@ export const USER_GENDER = {
   UNKNOWN: 'unknown'
 }
 // User constants end
-
+export const USER_ROLE = {
+  ADMIN: 'admin',
+  USER: 'user'
+}
 // Withdrawal constants start
 export const WITHDRAWAL_STATUS = {
   PENDING: 'pending',

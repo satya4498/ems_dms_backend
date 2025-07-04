@@ -1,5 +1,0 @@
-export * from './createBanner.service'
-export * from './updateBanner.service'
-export * from './getBannerTypes.service'
-export * from './getBanners.service'
-export * from './reorderBanner.service'

@@ -63,18 +63,18 @@ export class CredentialsController {
       next(error)
     }
   }
-  
-    /**
+
+  /**
      * @param {import('express').Request} req
      * @param {import('express').Response} res
      * @param {import('express').NextFunction} next
      */
-    static async resetSuperAdmin (req, res, next) {
-      try {
-        const result = await ResetSuperAdminPermissions.execute({ ...req.body }, req.context)
-        decorateResponse({ req, res, next }, result)
-      } catch (error) {
-        next(error)
-      }
+  static async resetSuperAdmin (req, res, next) {
+    try {
+      const result = await ResetSuperAdminPermissions.execute({ ...req.body }, req.context)
+      decorateResponse({ req, res, next }, result)
+    } catch (error) {
+      next(error)
     }
+  }
 }

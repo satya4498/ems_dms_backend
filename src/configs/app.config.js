@@ -67,6 +67,12 @@ export const appConfig = {
   },
   approvely: {
     url: config.get('approvely.url'),
-    secret: config.get('approvely.privateApiKey'),
+    secret: config.get('approvely.privateApiKey')
+  },
+  twilio: {
+    accountSid: config.get('twilio.accountSid'),
+    authToken: config.get('twilio.authToken'),
+    serviceSid: config.get('twilio.serviceSid'),
+    phoneNumber: config.get('twilio.phoneNumber')
   }
 }

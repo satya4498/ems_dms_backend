@@ -36,7 +36,7 @@ import { mapValues } from 'lodash'
  *  }
  * })
  */
-export function responseValidationMiddleware({ response = {} }) {
+export function responseValidationMiddleware ({ response = {} }) {
   const compiledResponseSchema = mapValues(response, schema => ajv.compile(schema))
 
   return (req, res, next) => {

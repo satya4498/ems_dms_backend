@@ -1,4 +1,3 @@
-import { TRANSACTION_STATUS } from '@src/utils/constants/public.constants.utils'
 import { DataTypes } from 'sequelize'
 import ModelBase from './modelBase.model'
 
@@ -16,39 +15,29 @@ export default class Transaction extends ModelBase {
 
   static attributes = {
     id: {
+      autoIncrement: true,
+      type: DataTypes.BIGINT,
       allowNull: false,
-      type: DataTypes.BIGINT,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
-    userId: {
+    walletId: {
       type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'wallets',
+        key: 'id'
+      }
+    },
+    amount: {
+      type: DataTypes.FLOAT,
       allowNull: false
     },
-    status: {
-      type: DataTypes.ENUM(Object.values(TRANSACTION_STATUS)),
-      allowNull: false,
-      defaultValue: TRANSACTION_STATUS.PENDING
+    type: {
+      type: DataTypes.ENUM('credit', 'debit'),
+      allowNull: false
     },
-    paymentId: {
+    reference: {
       type: DataTypes.STRING,
-      allowNull: true,
-      comment: 'order Id'
-    },
-    paymentProviderId: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    packageId: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    actioneeId: {
-      type: DataTypes.BIGINT,
-      allowNull: true
-    },
-    moreDetails: {
-      type: DataTypes.JSONB,
       allowNull: true
     },
     createdAt: {
@@ -61,21 +50,8 @@ export default class Transaction extends ModelBase {
     }
   }
 
-  static associate(models) {
-    Transaction.belongsTo(models.user, { foreignKey: 'userId' })
-    Transaction.hasMany(models.ledger, {
-      foreignKey: 'transactionId',
-      as: 'transactionLedger',
-      onDelete: 'CASCADE',
-      scope: {
-        transaction_type: 'standard'
-      }
-    });
-
-    Transaction.belongsTo(models.adminUser, { foreignKey: 'actioneeId' })
-    Transaction.belongsTo(models.paymentProvider, { foreignKey: 'paymentProviderId' })
-    Transaction.belongsTo(models.package, { foreignKey: 'packageId' })
-    Transaction.hasOne(models.userBonus, { foreignKey: 'transactionId' })
+  static associate (models) {
+    this.belongsTo(models.wallet, { foreignKey: 'walletId' })
     super.associate()
   }
 }

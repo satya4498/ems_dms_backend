@@ -1,15 +1,15 @@
 import { DataTypes } from 'sequelize'
 import ModelBase from './modelBase.model'
 
-export default class Currency extends ModelBase {
-  static model = 'currency'
+export default class PayoutQrCode extends ModelBase {
+  static model = 'payoutQrCode'
 
-  static table = 'currencies'
+  static table = 'payout_qr_codes'
 
   static options = {
     name: {
-      singular: 'currency',
-      plural: 'currencies'
+      singular: 'payoutQrCode',
+      plural: 'payoutQrCodes'
     }
   }
 
@@ -25,33 +25,28 @@ export default class Currency extends ModelBase {
       allowNull: false,
       unique: true
     },
-    name: {
-      type: DataTypes.STRING,
+    amount: {
+      type: DataTypes.FLOAT,
       allowNull: false
     },
-    symbol: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    isActive: {
-      type: DataTypes.BOOLEAN,
+    createdBy: {
+      type: DataTypes.BIGINT,
       allowNull: false,
-      defaultValue: true,
-      field: 'is_active'
+      comment: 'Admin user id who created the QR code'
     },
     createdAt: {
       allowNull: false,
-      type: DataTypes.DATE,
-      field: 'created_at'
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: DataTypes.DATE,
-      field: 'updated_at'
+      type: DataTypes.DATE
     }
   }
 
   static associate (models) {
+    this.belongsTo(models.user, { foreignKey: 'createdBy' })
+    this.belongsTo(models.user, { foreignKey: 'usedBy' })
     super.associate()
   }
 }
