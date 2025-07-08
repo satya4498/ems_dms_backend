@@ -21,7 +21,7 @@ export function isAuthenticated (role) {
       // const tokenObject = await Cache.get(`admin:${decodedToken.adminUserId}`)
       // if(!tokenObject || tokenObject.token!==accessToken) return next(new AuthenticationError(errorTypes.AuthenticationErrorType))
 
-      if (role && !decodedToken?.permission === role) return next(new AuthenticationError(errorTypes.NotEnoughPermissionErrorType))
+      if (role && decodedToken?.role !== role) return next(new AuthenticationError(errorTypes.NotEnoughPermissionErrorType))
 
       req.authenticated = {
         userId: decodedToken.userId,

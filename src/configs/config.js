@@ -384,6 +384,26 @@ const config = convict({
       default: '',
       env: 'TWILIO_PHONE_NUMBER'
     }
+  },
+  razorpayX: {
+    keyId: {
+      doc: 'RazorpayX Key ID',
+      format: String,
+      default: '',
+      env: 'RAZORPAYX_KEY_ID'
+    },
+    keySecret: {
+      doc: 'RazorpayX Key Secret',
+      format: String,
+      default: '',
+      env: 'RAZORPAYX_KEY_SECRET'
+    },
+    accountNumber: {
+      doc: 'RazorpayX Account Number',
+      format: String,
+      default: '',
+      env: 'RAZORPAYX_ACCOUNT_NUMBER'
+    }
   }
 })
 config.validate({ allowed: 'strict' })

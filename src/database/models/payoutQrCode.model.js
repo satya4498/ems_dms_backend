@@ -46,7 +46,7 @@ export default class PayoutQrCode extends ModelBase {
 
   static associate (models) {
     this.belongsTo(models.user, { foreignKey: 'createdBy' })
-    this.belongsTo(models.user, { foreignKey: 'usedBy' })
+    this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'qrCodeId' })
     super.associate()
   }
 }

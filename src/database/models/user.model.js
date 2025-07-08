@@ -109,6 +109,15 @@ export default class User extends ModelBase {
       allowNull: false,
       defaultValue: USER_ROLE.USER
     },
+    contactId: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    fundAccountId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'RazorpayX fund account ID for payouts'
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
@@ -125,6 +134,7 @@ export default class User extends ModelBase {
     super.associate()
     this.hasMany(models.payoutQrCode, { foreignKey: 'createdBy' })
     this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'userId' })
+    this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'adminId', as: 'adminRedemptions' })
     this.hasOne(models.wallet, { foreignKey: 'userId' })
   }
 }

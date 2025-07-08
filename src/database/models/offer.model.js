@@ -67,8 +67,8 @@ export default class Offer extends ModelBase {
   }
 
   static associate (models) {
-    this.belongsTo(models.user, { foreignKey: 'userId' })
-    this.belongsTo(models.user, { foreignKey: 'createdBy' })
+    this.belongsTo(models.user, { foreignKey: 'userId', as: 'user' })
+    this.belongsTo(models.user, { foreignKey: 'createdBy', as: 'creator' })
     super.associate()
   }
 }

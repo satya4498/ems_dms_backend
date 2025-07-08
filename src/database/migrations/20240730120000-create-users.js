@@ -101,6 +101,11 @@ module.exports = {
         defaultValue: true,
         field: 'is_active'
       },
+      contactId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        field: 'contact_id'
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

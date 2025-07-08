@@ -74,5 +74,10 @@ export const appConfig = {
     authToken: config.get('twilio.authToken'),
     serviceSid: config.get('twilio.serviceSid'),
     phoneNumber: config.get('twilio.phoneNumber')
+  },
+  razorpayX: {
+    keyId: config.get('razorpayX.keyId'),
+    keySecret: config.get('razorpayX.keySecret'),
+    accountNumber: config.get('razorpayX.accountNumber')
   }
 }
