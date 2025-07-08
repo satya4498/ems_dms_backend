@@ -1,18 +1,19 @@
 import { decorateResponse } from '@src/helpers/response.helpers'
-import { SendOtpService } from '@src/services/user/sendOtp.service'
-import { VerifyOtpService } from '@src/services/user/verifyOtp.service'
-import { GetUserProfileService } from '@src/services/user/getUserProfile.service'
-import { UpdateProfileService } from '@src/services/user/updateProfile.service'
-import { GetTransactionHistoryService } from '@src/services/user/getTransactionHistory.service'
-export class UserController {
+import { CreateOfferService } from '@src/services/offer/createOffer.service'
+import { GetOffersService } from '@src/services/offer/getOffers.service'
+import { GetOfferService } from '@src/services/offer/getOffer.service'
+import { UpdateOfferService } from '@src/services/offer/updateOffer.service'
+import { DeleteOfferService } from '@src/services/offer/deleteOffer.service'
+
+export class OfferController {
   /**
   * @param {import('express').Request} req
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async sendOtp (req, res, next) {
+  static async create (req, res, next) {
     try {
-      const result = await SendOtpService.execute({ ...req.body, image: req.file }, req.context)
+      const result = await CreateOfferService.execute({ ...req.body, createdBy: req.authenticated.userId }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)
@@ -24,9 +25,9 @@ export class UserController {
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async verifyOtp (req, res, next) {
+  static async getAll (req, res, next) {
     try {
-      const result = await VerifyOtpService.execute({ ...req.body, image: req.file }, req.context)
+      const result = await GetOffersService.execute(req.query, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)
@@ -38,9 +39,9 @@ export class UserController {
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async getProfile (req, res, next) {
+  static async getById (req, res, next) {
     try {
-      const result = await GetUserProfileService.execute({ ...req.query, image: req.file, ...req.authenticated }, req.context)
+      const result = await GetOfferService.execute({ ...req.params }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)
@@ -52,9 +53,9 @@ export class UserController {
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async updateProfile (req, res, next) {
+  static async update (req, res, next) {
     try {
-      const result = await UpdateProfileService.execute({ ...req.body, userId: req.authenticated.userId }, req.context)
+      const result = await UpdateOfferService.execute({ ...req.body, ...req.params, updatedBy: req.authenticated.userId }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)
@@ -66,9 +67,9 @@ export class UserController {
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async getTransactionHistory (req, res, next) {
+  static async delete (req, res, next) {
     try {
-      const result = await GetTransactionHistoryService.execute({ ...req.query, userId: req.authenticated.userId }, req.context)
+      const result = await DeleteOfferService.execute({ ...req.params, deletedBy: req.authenticated.userId }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)

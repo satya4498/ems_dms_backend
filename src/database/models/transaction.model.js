@@ -52,6 +52,7 @@ export default class Transaction extends ModelBase {
 
   static associate (models) {
     this.belongsTo(models.wallet, { foreignKey: 'walletId' })
+    this.hasOne(models.ledger, { foreignKey: 'transactionId' })
     super.associate()
   }
 }

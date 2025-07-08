@@ -36,6 +36,29 @@ export default class PayoutQrCodeRedemption extends ModelBase {
         key: 'id'
       }
     },
+    status: {
+      type: DataTypes.ENUM('pending', 'approved', 'rejected'),
+      allowNull: false,
+      defaultValue: 'pending'
+    },
+    adminId: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      comment: 'Admin who approved/rejected the request'
+    },
+    approvedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    remarks: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Admin remarks for approval/rejection'
+    },
     redeemedAt: {
       type: DataTypes.DATE,
       allowNull: false
@@ -53,6 +76,7 @@ export default class PayoutQrCodeRedemption extends ModelBase {
   static associate (models) {
     this.belongsTo(models.payoutQrCode, { foreignKey: 'qrCodeId' })
     this.belongsTo(models.user, { foreignKey: 'userId' })
+    this.belongsTo(models.user, { foreignKey: 'adminId', as: 'admin' })
     super.associate()
   }
 }
