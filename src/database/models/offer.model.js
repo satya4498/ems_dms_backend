@@ -51,11 +51,6 @@ export default class Offer extends ModelBase {
       allowNull: false,
       defaultValue: true
     },
-    transactionFundId: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      comment: 'Transaction fund id'
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE
