@@ -1,12 +1,9 @@
 
-
 export const MESSAGE_STATUS = {
   ACTIVE: 'ACTIVE',
   EDITED: 'EDITED',
   DELETED: 'DELETED'
 }
-
-
 
 export const MESSAGE_TYPE = {
   MESSAGE: 'MESSAGE',
