@@ -9,7 +9,7 @@ export function fileUpload (supportedFileFormats = [], allowedVideoFormats = [])
   supportedFileFormats = supportedFileFormats.map(fileFormat => `image/${fileFormat}`)
   allowedVideoFormats = allowedVideoFormats.map(fileFormat => `video/${fileFormat}`)
   const upload = multer({
-    limits: { fileSize: 1000000 *10 }, // 10mbs
+    limits: { fileSize: 1000000 * 10 }, // 10mbs
     fileFilter: (_, file, next) => {
       if ((supportedFileFormats.length && !supportedFileFormats.includes(file.mimetype)) && (allowedVideoFormats.length && !allowedVideoFormats.includes(file.mimetype))) return next(new RequestInputValidationError(errorTypes.FileFormatNotSupportedErrorType), true)
       next(null, true)

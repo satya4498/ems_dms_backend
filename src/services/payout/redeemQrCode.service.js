@@ -2,12 +2,16 @@ import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
 import { NumberPrecision } from '@src/libs/numberPrecision'
+import { AddBankAccountService } from '@src/services/razorpay/addBankAccount.service'
 
 const redeemQrCodeConstraints = ajv.compile({
   type: 'object',
   properties: {
     qrCodeId: { type: 'string' },
-    userId: { type: 'string' }
+    userId: { type: 'string' },
+    name: { type: 'string', minLength: 1, maxLength: 100 },
+    ifsc: { type: 'string', minLength: 11, maxLength: 11 },
+    account_number: { type: 'string', minLength: 9, maxLength: 18 }
   },
   required: ['qrCodeId', 'userId']
 })
@@ -19,12 +23,24 @@ export class RedeemQrCodeService extends ServiceBase {
 
   async run () {
     try {
-      const { qrCodeId, userId } = this.args
+      const { qrCodeId, userId, name, ifsc, account_number } = this.args
 
       // Check if user exists
       const user = await this.context.sequelize.models.user.findByPk(userId)
       if (!user) {
         throw new APIError('User not found')
+      }
+
+      // Create fund account if not already present
+      const fundAccountId = user.fundAccountId
+      if (!fundAccountId) {
+        await AddBankAccountService.execute({
+          userId,
+          contactId: user.contactId,
+          name,
+          ifsc,
+          account_number
+        }, this.context)
       }
 
       // Check if QR code exists and is valid
@@ -42,7 +58,7 @@ export class RedeemQrCodeService extends ServiceBase {
       })
 
       if (existingRedemption) {
-        throw new APIError('You have already redeemed this QR code')
+        return { success: false, message: 'This QR code has already redeemed', redemption: qrCodeId }
       }
 
       // Get user's wallet
