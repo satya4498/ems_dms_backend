@@ -2,7 +2,7 @@ import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
 import { USER_GENDER } from '@src/utils/constants/public.constants.utils'
-
+import { CreateContactService } from '@src/services/razorpay/createContact.service'
 /**
  * Service for updating user profile information
  *
@@ -118,6 +118,17 @@ export class UpdateProfileService extends ServiceBase {
       const cleanUpdateData = Object.fromEntries(
         Object.entries(updateData).filter(([_, value]) => value !== undefined && value !== null)
       )
+
+      // Create Razorpay contact if not already created
+      const razorpayContactId = existingUser.razorpayContactId
+      if (!razorpayContactId) {
+        await CreateContactService.execute(
+          {
+            userId,
+            name: `${cleanUpdateData.firstName || existingUser.firstName} ${cleanUpdateData.lastName || existingUser.lastName}`,
+            contact: existingUser.phone
+          }, this.context)
+      }
 
       // Update user profile
       await existingUser.update(cleanUpdateData)

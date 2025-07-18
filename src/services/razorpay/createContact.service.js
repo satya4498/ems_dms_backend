@@ -50,7 +50,6 @@ export class CreateContactService extends ServiceBase {
       // Prepare contact data for RazorpayX
       const razorpayXContactData = {
         name: contactData.name,
-        email: contactData.email || user.email,
         contact: contactData.contact || user.phone,
         type: contactData.type || 'customer',
         reference_id: contactData.reference_id || `user_${userId}`,
