@@ -14,7 +14,7 @@ payoutRouter.post('/payout/update', isAuthenticated(USER_ROLE.ADMIN), PayoutQrCo
 payoutRouter.delete('/payout/delete', isAuthenticated(USER_ROLE.ADMIN), PayoutQrCodeController.delete, responseValidationMiddleware({}))
 
 // QR Code Redemption (User)
-payoutRouter.post('/redeem', isAuthenticated(), requestValidationMiddleware(redeemQrCodeSchema), PayoutQrCodeController.redeemPayoutRequest, responseValidationMiddleware(redeemQrCodeSchema))
+payoutRouter.post('/redeem', isAuthenticated(USER_ROLE.USER), requestValidationMiddleware(redeemQrCodeSchema), PayoutQrCodeController.redeemPayoutRequest, responseValidationMiddleware(redeemQrCodeSchema))
 
 // Redemption Management (Admin only)
 payoutRouter.get('/redemptions', isAuthenticated(USER_ROLE.ADMIN), requestValidationMiddleware(getPendingRedemptionsSchema), PayoutQrCodeController.getPendingRedemptions, responseValidationMiddleware({}))
