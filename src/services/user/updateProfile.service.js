@@ -89,29 +89,10 @@ export class UpdateProfileService extends ServiceBase {
   async run () {
     try {
       const { userId, ...updateData } = this.args
-
-      if (!userId) {
-        throw new APIError('User not authenticated')
-      }
-
       // Check if user exists
       const existingUser = await this.context.sequelize.models.user.findByPk(userId)
       if (!existingUser) {
         throw new APIError('User not found')
-      }
-
-      // If email is being updated, check if it's already taken by another user
-      if (updateData.email && updateData.email !== existingUser.email) {
-        const emailExists = await this.context.sequelize.models.user.findOne({
-          where: {
-            email: updateData.email,
-            id: { [this.context.sequelize.Sequelize.Op.ne]: userId }
-          }
-        })
-
-        if (emailExists) {
-          throw new APIError('Email already exists')
-        }
       }
 
       // Remove undefined values to avoid overwriting with null

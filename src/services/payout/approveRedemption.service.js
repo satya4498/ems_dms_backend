@@ -28,7 +28,7 @@ export class ApproveRedemptionService extends ServiceBase {
         where: { id: adminId, role: 'admin' }
       })
       if (!admin) {
-        throw new APIError('Admin not found or insufficient permissions')
+        return this.addError('AdminUserNotFoundErrorType', 'Admin not found or insufficient permissions')
       }
 
       // Find the redemption request
@@ -47,11 +47,11 @@ export class ApproveRedemptionService extends ServiceBase {
       })
 
       if (!redemption) {
-        throw new APIError('Redemption request not found')
+        return this.addError('RedemptionNotFoundErrorType', 'Redemption request not found')
       }
 
       if (redemption.status !== 'pending') {
-        throw new APIError('Redemption request has already been processed')
+        return this.addError('InvalidRedemptionStatusErrorType', 'Redemption request is not in pending status')
       }
 
       // Update redemption status
@@ -126,21 +126,25 @@ export class ApproveRedemptionService extends ServiceBase {
     })
 
     if (!wallet) {
-      throw new APIError('User wallet not found')
+      return this.addError('WalletNotFoundErrorType', 'User wallet not found')
     }
 
     // Check if user has sufficient balance
     if (wallet.balance < payoutQrCode.amount) {
-      throw new APIError('Insufficient wallet balance for payout')
+      return this.addError('InsufficientBalanceErrorType', 'Insufficient wallet balance for payout')
     }
 
     // Check if user has contactId and fundAccountId for RazorpayX
     if (!user.contactId) {
-      throw new APIError('User contact not found. Please create RazorpayX contact first.')
+      return this.addError('UserContactNotFoundErrorType', 'User contact not found. Please add contact first.')
     }
 
     if (!user.fundAccountId) {
-      throw new APIError('User bank account not found. Please add bank account first.')
+      const fundAccounts = await this.getUserFundAccounts(user.contactId)
+      if (fundAccounts.length === 0) {
+        return this.addError('UserFundAccountNotFoundErrorType', 'No fund accounts found for user. Please add a fund account first.')
+      }
+      user.fundAccountId = fundAccounts[0].id // Use the first fund account
     }
 
     // Debit wallet first

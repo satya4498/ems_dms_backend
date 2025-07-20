@@ -16,9 +16,7 @@ export class DeletePayoutService extends ServiceBase {
 
   async run () {
     const { payoutQrCodeId } = this.args
-    if (!payoutQrCodeId) {
-      return this.addError('payoutQrCodeId', 'is required')
-    }
+
     const transaction = await this.context.models.sequelize.transaction()
     try {
       // Delete related redemptions first
@@ -33,7 +31,7 @@ export class DeletePayoutService extends ServiceBase {
       })
       await transaction.commit()
       if (deleted === 0) {
-        return this.addError('Payout', 'QR code not found')
+        return this.addError('QrCodeNotFoundErrorType', 'QR code not found or already deleted')
       }
       return { success: true, message: 'Payout QR code deleted successfully' }
     } catch (error) {

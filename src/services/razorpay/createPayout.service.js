@@ -33,7 +33,7 @@ export class CreatePayoutService extends ServiceBase {
         where: { id: userId, contactId }
       })
       if (!user) {
-        throw new APIError('User not found or contact not associated')
+        return this.addError('UserNotFoundErrorType', 'User not found or contact not associated')
       }
 
       // Initialize RazorpayX API

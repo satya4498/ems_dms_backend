@@ -25,13 +25,13 @@ export class DeleteOfferService extends ServiceBase {
         where: { id: deletedBy, role: 'admin' }
       })
       if (!deleter) {
-        throw new APIError('Admin not found or insufficient permissions')
+        return this.addError('AdminUserNotFoundErrorType', 'Admin not found or insufficient permissions')
       }
 
       // Check if offer exists
       const existingOffer = await this.context.sequelize.models.offer.findByPk(id)
       if (!existingOffer) {
-        throw new APIError('Offer not found')
+        return this.addError('OfferNotFoundErrorType', 'Offer not found')
       }
 
       // Delete the offer

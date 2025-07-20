@@ -18,8 +18,7 @@ export class GetUserProfileService extends ServiceBase {
 
   async run () {
     try {
-      const userId = this.args.userId
-      if (!userId) throw new APIError('User not authenticated')
+      const { userId } = this.args
 
       const user = await this.context.sequelize.models.user.findOne({
         where: { id: userId },
@@ -30,7 +29,7 @@ export class GetUserProfileService extends ServiceBase {
           }
         }
       })
-      if (!user) throw new APIError('User not found')
+      if (!user) return this.addError('UserNotFoundErrorType', 'User not found')
 
       return { user }
     } catch (err) {

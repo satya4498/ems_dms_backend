@@ -21,7 +21,7 @@ export class CreatePayoutService extends ServiceBase {
     // Check for duplicate code
     const exists = await this.context.models.payoutQrCode.findOne({ where: { code } })
     if (exists) {
-      return this.addError('Code', 'already exists')
+      return this.addError('CodeAlreadyExistsErrorType', 'QR code with this code already exists')
     }
     // Create payout QR code
     const payout = await this.context.models.payoutQrCode.create({ code, amount, createdBy })

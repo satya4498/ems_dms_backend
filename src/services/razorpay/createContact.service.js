@@ -36,12 +36,12 @@ export class CreateContactService extends ServiceBase {
       // Check if user exists
       const user = await this.context.sequelize.models.user.findByPk(userId)
       if (!user) {
-        throw new APIError('User not found')
+        return this.addError('UserNotFoundErrorType', 'User not found')
       }
 
       // Check if user already has a contactId
       if (user.contactId) {
-        throw new APIError('User already has a Razorpay contact')
+        return this.addError('ContactAlreadyExistsErrorType', 'User already has a Razorpay contact')
       }
 
       // Initialize RazorpayX API
