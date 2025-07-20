@@ -27,13 +27,13 @@ export class UpdatePayoutService extends ServiceBase {
         where: { id: createdBy, role: 'admin' }
       })
       if (!admin) {
-        throw new APIError('Admin not found or insufficient permissions')
+        return this.addError('AdminUserNotFoundErrorType', 'Admin not found or insufficient permissions')
       }
 
       // Check if QR code exists
       const qrCode = await this.context.sequelize.models.payoutQrCode.findByPk(id)
       if (!qrCode) {
-        throw new APIError('QR code not found')
+        return this.addError('QrCodeNotFoundErrorType', 'QR code not found')
       }
 
       // Check if new code already exists (excluding current QR code)
@@ -42,7 +42,7 @@ export class UpdatePayoutService extends ServiceBase {
           where: { code, id: { [this.context.sequelize.Sequelize.Op.ne]: id } }
         })
         if (existingCode) {
-          throw new APIError('QR code already exists')
+          return this.addError('CodeAlreadyExistsErrorType', 'QR code with this code already exists')
         }
       }
 

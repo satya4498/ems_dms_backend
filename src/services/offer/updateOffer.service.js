@@ -31,20 +31,20 @@ export class UpdateOfferService extends ServiceBase {
         where: { id: updatedBy, role: 'admin' }
       })
       if (!updater) {
-        throw new APIError('Admin not found or insufficient permissions')
+        return this.addError('AdminUserNotFoundErrorType', 'Admin not found or insufficient permissions')
       }
 
       // Check if offer exists
       const existingOffer = await this.context.sequelize.models.offer.findByPk(id)
       if (!existingOffer) {
-        throw new APIError('Offer not found')
+        return this.addError('OfferNotFoundErrorType', 'Offer not found')
       }
 
       // If userId is provided, check if user exists
       if (userId) {
         const user = await this.context.sequelize.models.user.findByPk(userId)
         if (!user) {
-          throw new APIError('Target user not found')
+          return this.addError('UserNotFoundErrorType', 'User not found')
         }
       }
 

@@ -27,7 +27,7 @@ export class GetPendingRedemptionsService extends ServiceBase {
         where: { id: adminId, role: 'admin' }
       })
       if (!admin) {
-        throw new APIError('Admin not found or insufficient permissions')
+        return this.addError('AdminUserNotFoundErrorType', 'Admin not found or insufficient permissions')
       }
 
       // Build where clause

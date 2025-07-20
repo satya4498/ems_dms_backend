@@ -37,7 +37,7 @@ export class GetOfferService extends ServiceBase {
       })
 
       if (!offer) {
-        throw new APIError('Offer not found')
+        return this.addError('OfferNotFoundErrorType', 'Offer not found')
       }
 
       this.log.info('Offer Retrieved', {

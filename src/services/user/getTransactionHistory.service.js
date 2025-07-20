@@ -27,7 +27,7 @@ export class GetTransactionHistoryService extends ServiceBase {
         where: { id: userId }
       })
       if (!user) {
-        throw new APIError('User not found')
+        return this.addError('UserNotFoundErrorType', 'User not found')
       }
 
       // Get user's wallet
@@ -39,7 +39,7 @@ export class GetTransactionHistoryService extends ServiceBase {
       })
 
       if (!wallet) {
-        throw new APIError('User wallet not found')
+        return this.addError('WalletNotFoundErrorType', 'User wallet not found')
       }
 
       // Build where clause for transactions
@@ -47,7 +47,6 @@ export class GetTransactionHistoryService extends ServiceBase {
       if (type !== 'all') {
         whereClause.type = type
       }
-
       // Calculate offset
       const offset = (page - 1) * limit
 

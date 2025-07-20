@@ -11,7 +11,7 @@ const redeemQrCodeConstraints = ajv.compile({
     userId: { type: 'string' },
     name: { type: 'string', minLength: 1, maxLength: 100 },
     ifsc: { type: 'string', minLength: 11, maxLength: 11 },
-    account_number: { type: 'string', minLength: 9, maxLength: 18 }
+    accountNumber: { type: 'string', minLength: 9, maxLength: 18 }
   },
   required: ['qrCodeId', 'userId']
 })
@@ -23,12 +23,12 @@ export class RedeemQrCodeService extends ServiceBase {
 
   async run () {
     try {
-      const { qrCodeId, userId, name, ifsc, account_number } = this.args
+      const { qrCodeId, userId, name, ifsc, accountNumber } = this.args
 
       // Check if user exists
       const user = await this.context.sequelize.models.user.findByPk(userId)
       if (!user) {
-        throw new APIError('User not found')
+        return this.addError('UserNotFoundErrorType', 'User not found')
       }
 
       // Create fund account if not already present
@@ -39,14 +39,14 @@ export class RedeemQrCodeService extends ServiceBase {
           contactId: user.contactId,
           name,
           ifsc,
-          account_number
+          accountNumber
         }, this.context)
       }
 
       // Check if QR code exists and is valid
       const qrCode = await this.context.sequelize.models.payoutQrCode.findByPk(qrCodeId)
       if (!qrCode) {
-        throw new APIError('QR code not found')
+        return this.addError('QrCodeNotFoundErrorType', 'QR code not found')
       }
 
       // Check if user has already redeemed this QR code
@@ -58,7 +58,7 @@ export class RedeemQrCodeService extends ServiceBase {
       })
 
       if (existingRedemption) {
-        return { success: false, message: 'This QR code has already redeemed', redemption: qrCodeId }
+        return { success: false, message: `This QR code has already redeemed by ${user?.firstNme}`, redemption: qrCodeId }
       }
 
       // Get user's wallet
@@ -70,7 +70,7 @@ export class RedeemQrCodeService extends ServiceBase {
       })
 
       if (!wallet) {
-        throw new APIError('User wallet not found')
+        return this.addError('WalletNotFoundErrorType', 'User wallet not found')
       }
 
       // Add balance to wallet immediately

@@ -37,7 +37,7 @@ export class CreateOfferService extends ServiceBase {
       if (userId) {
         const user = await this.context.sequelize.models.user.findByPk(userId)
         if (!user) {
-          throw new APIError('Target user not found')
+          return this.addError('UserNotFoundErrorType', 'User not found')
         }
       }
 

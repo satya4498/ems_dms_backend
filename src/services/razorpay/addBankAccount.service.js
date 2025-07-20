@@ -11,9 +11,9 @@ const addBankAccountConstraints = ajv.compile({
     contactId: { type: 'string' },
     name: { type: 'string', minLength: 1, maxLength: 100 },
     ifsc: { type: 'string', minLength: 11, maxLength: 11 },
-    account_number: { type: 'string', minLength: 9, maxLength: 18 }
+    accountNumber: { type: 'string', minLength: 9, maxLength: 18 }
   },
-  required: ['userId', 'contactId', 'name', 'ifsc', 'account_number']
+  required: ['userId', 'contactId', 'name', 'ifsc', 'accountNumber']
 })
 
 export class AddBankAccountService extends ServiceBase {
@@ -30,7 +30,7 @@ export class AddBankAccountService extends ServiceBase {
         where: { id: userId, contactId }
       })
       if (!user) {
-        throw new APIError('User not found or contact not associated')
+        return this.addError('UserNotFoundErrorType', 'User not found or contact not associated')
       }
 
       // Initialize RazorpayX API
@@ -43,7 +43,7 @@ export class AddBankAccountService extends ServiceBase {
         bank_account: {
           name: bankData.name,
           ifsc: bankData.ifsc,
-          account_number: bankData.account_number
+          account_number: bankData.accountNumber
         }
       }
 

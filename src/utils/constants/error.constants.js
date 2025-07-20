@@ -58,7 +58,18 @@ const messages = {
   DOCUMENT_ALREADY_APPROVED: 'DOCUMENT_ALREADY_APPROVED',
   DOCUMENTS_NOT_AVAILABLE: 'DOCUMENTS_NOT_AVAILABLE',
   DOCUMENT_LABEL_DOES_NOT_EXISTS: 'DOCUMENT_LABEL_DOES_NOT_EXISTS',
-  EMAIL_TEMPLATE_NOT_FOUND: 'EMAIL_TEMPLATE_NOT_FOUND'
+  EMAIL_TEMPLATE_NOT_FOUND: 'EMAIL_TEMPLATE_NOT_FOUND',
+  QR_CODE_NOT_FOUND: 'QR_CODE_NOT_FOUND',
+  ADMIN_NOT_FOUND: 'ADMIN_NOT_FOUND',
+  REDEMPTION_NOT_FOUND: 'REDEMPTION_NOT_FOUND',
+  INVALID_REDEMPTION_STATUS: 'INVALID_REDEMPTION_STATUS',
+  WALLET_NOT_FOUND: 'WALLET_NOT_FOUND',
+  INSUFFICIENT_BALANCE: 'INSUFFICIENT_BALANCE',
+  USER_CONTACT_NOT_FOUND: 'USER_CONTACT_NOT_FOUND',
+  USER_FUND_ACCOUNT_NOT_FOUND: 'USER_FUND_ACCOUNT_NOT_FOUND',
+  USER_BANK_ACCOUNT_NOT_FOUND: 'USER_BANK_ACCOUNT_NOT_FOUND',
+  CODE_ALREADY_EXISTS: 'CODE_ALREADY_EXISTS',
+  OFFER_NOT_FOUND: 'OFFER_NOT_FOUND'
 }
 
 export const errorTypes = {
@@ -446,5 +457,82 @@ export const errorTypes = {
     isOperational: true,
     description: messages.INVALID_TYPE,
     erroCode: 3055
+  },
+  QrCodeNotFoundErrorType: {
+    name: 'QrCodeNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.QR_CODE_NOT_FOUND,
+    erroCode: 3056
+  },
+  AdminNotFoundErrorType: {
+    name: 'AdminNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.ADMIN_NOT_FOUND,
+    erroCode: 3057
+  },
+  RedemptionNotFoundErrorType: {
+    name: 'RedemptionNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.REDEMPTION_NOT_FOUND,
+    erroCode: 3058
+  },
+  InvalidRedemptionStatusErrorType: {
+    name: 'InvalidRedemptionStatusErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.INVALID_REDEMPTION_STATUS,
+    erroCode: 3059
+  },
+  WalletNotFoundErrorType: {
+    name: 'WalletNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.WALLET_NOT_FOUND,
+    erroCode: 3060
+  },
+  InsufficientBalanceErrorType: {
+    name: 'InsufficientBalanceErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.INSUFFICIENT_BALANCE,
+    erroCode: 3061
+  },
+  UserContactNotFoundErrorType: {
+    name: 'UserContactNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.USER_CONTACT_NOT_FOUND,
+    erroCode: 3062
+  },
+  UserFundAccountNotFoundErrorType: {
+    name: 'UserFundAccountNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.USER_FUND_ACCOUNT_NOT_FOUND,
+    erroCode: 3063
+  },
+  UserBankAccountNotFoundErrorType: {
+    name: 'UserBankAccountNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.USER_BANK_ACCOUNT_NOT_FOUND,
+    erroCode: 3064
+  },
+  CodeAlreadyExistsErrorType: {
+    name: 'CodeAlreadyExistsErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.CODE_ALREADY_EXISTS,
+    erroCode: 3065
+  },
+  OfferNotFoundErrorType: {
+    name: 'OfferNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.OFFER_NOT_FOUND,
+    erroCode: 3066
   }
 }
