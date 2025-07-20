@@ -58,7 +58,7 @@ export class RedeemQrCodeService extends ServiceBase {
       })
 
       if (existingRedemption) {
-        return { success: false, message: 'This QR code has already redeemed', redemption: qrCodeId }
+        return { success: false, message: `This QR code has already redeemed by ${user?.firstNme}`, redemption: qrCodeId }
       }
 
       // Get user's wallet
