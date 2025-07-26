@@ -17,7 +17,7 @@ export class DeletePayoutService extends ServiceBase {
   async run () {
     const { payoutQrCodeId } = this.args
 
-    const transaction = await this.context.models.sequelize.transaction()
+    const transaction = await this.context.sequelize.transaction()
     try {
       // Delete related redemptions first
       await this.context.models.payoutQrCodeRedemption.destroy({

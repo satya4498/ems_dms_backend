@@ -59,17 +59,23 @@ const messages = {
   DOCUMENTS_NOT_AVAILABLE: 'DOCUMENTS_NOT_AVAILABLE',
   DOCUMENT_LABEL_DOES_NOT_EXISTS: 'DOCUMENT_LABEL_DOES_NOT_EXISTS',
   EMAIL_TEMPLATE_NOT_FOUND: 'EMAIL_TEMPLATE_NOT_FOUND',
-  QR_CODE_NOT_FOUND: 'QR_CODE_NOT_FOUND',
-  ADMIN_NOT_FOUND: 'ADMIN_NOT_FOUND',
-  REDEMPTION_NOT_FOUND: 'REDEMPTION_NOT_FOUND',
-  INVALID_REDEMPTION_STATUS: 'INVALID_REDEMPTION_STATUS',
-  WALLET_NOT_FOUND: 'WALLET_NOT_FOUND',
-  INSUFFICIENT_BALANCE: 'INSUFFICIENT_BALANCE',
-  USER_CONTACT_NOT_FOUND: 'USER_CONTACT_NOT_FOUND',
-  USER_FUND_ACCOUNT_NOT_FOUND: 'USER_FUND_ACCOUNT_NOT_FOUND',
-  USER_BANK_ACCOUNT_NOT_FOUND: 'USER_BANK_ACCOUNT_NOT_FOUND',
-  CODE_ALREADY_EXISTS: 'CODE_ALREADY_EXISTS',
-  OFFER_NOT_FOUND: 'OFFER_NOT_FOUND'
+  QR_CODE_NOT_FOUND: 'QR code not found',
+  ADMIN_NOT_FOUND: 'Admin not found',
+  REDEMPTION_NOT_FOUND: 'Redemption request not found',
+  INVALID_REDEMPTION_STATUS: 'Invalid redemption status',
+  WALLET_NOT_FOUND: 'User wallet not found',
+  INSUFFICIENT_BALANCE: 'Insufficient wallet balance for payout',
+  USER_CONTACT_NOT_FOUND: 'User contact not found. Please add contact first.',
+  USER_FUND_ACCOUNT_NOT_FOUND: 'No fund accounts found for user. Please add a fund account first.',
+  USER_BANK_ACCOUNT_NOT_FOUND: 'User bank account not found',
+  CODE_ALREADY_EXISTS: 'QR code with this code already exists',
+  OFFER_NOT_FOUND: 'Offer not found',
+  USER_NOT_FOUND: 'User not found',
+  REDEMPTION_ALREADY_PENDING: 'Redemption request is already pending for this QR code',
+  REDEMPTION_ALREADY_APPROVED: 'Redemption has already been approved for this QR code',
+  REDEMPTION_REJECTED: 'Redemption has been rejected for this QR code',
+  CONTACT_ALREADY_EXISTS: 'User already has a Razorpay contact',
+  QR_CODE_NOT_SCANNED: 'QR code must be scanned first before requesting redemption'
 }
 
 export const errorTypes = {
@@ -534,5 +540,47 @@ export const errorTypes = {
     isOperational: true,
     description: messages.OFFER_NOT_FOUND,
     erroCode: 3066
+  },
+  QrCodeNotScannedErrorType: {
+    name: 'QrCodeNotScannedErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.QR_CODE_NOT_SCANNED,
+    erroCode: 3072
+  },
+  UserNotFoundErrorType: {
+    name: 'UserNotFoundErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.USER_NOT_FOUND,
+    erroCode: 3067
+  },
+  RedemptionAlreadyPendingErrorType: {
+    name: 'RedemptionAlreadyPendingErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.REDEMPTION_ALREADY_PENDING,
+    erroCode: 3068
+  },
+  RedemptionAlreadyApprovedErrorType: {
+    name: 'RedemptionAlreadyApprovedErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.REDEMPTION_ALREADY_APPROVED,
+    erroCode: 3069
+  },
+  RedemptionRejectedErrorType: {
+    name: 'RedemptionRejectedErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.REDEMPTION_REJECTED,
+    erroCode: 3070
+  },
+  ContactAlreadyExistsErrorType: {
+    name: 'ContactAlreadyExistsErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.CONTACT_ALREADY_EXISTS,
+    erroCode: 3071
   }
 }

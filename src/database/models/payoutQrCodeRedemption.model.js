@@ -37,7 +37,7 @@ export default class PayoutQrCodeRedemption extends ModelBase {
       }
     },
     status: {
-      type: DataTypes.ENUM('pending', 'approved', 'rejected'),
+      type: DataTypes.ENUM('pending', 'approved', 'rejected', 'scanned'),
       allowNull: false,
       defaultValue: 'pending'
     },

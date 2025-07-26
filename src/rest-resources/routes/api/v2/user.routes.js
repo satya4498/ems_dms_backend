@@ -6,6 +6,7 @@ import { isAuthenticated } from '@src/rest-resources/middlewares/isAuthenticated
 // import { resources } from '@src/utils/constants/permission.constant'
 import { UserController } from '@src/rest-resources/controllers/user.controller'
 import { updateProfileSchema } from '@src/schema/user'
+import { USER_ROLE } from '@src/utils/constants/public.constants.utils'
 // import { USER_ROLE } from '@src/utils/constants/public.constants.utils'
 const userRouter = express.Router({ mergeParams: true })
 
@@ -14,5 +15,8 @@ userRouter.post('/send-otp', UserController.sendOtp, responseValidationMiddlewar
 userRouter.post('/verify-otp', UserController.verifyOtp, responseValidationMiddleware({}))
 userRouter.get('/profile', isAuthenticated(), UserController.getProfile, responseValidationMiddleware({}))
 userRouter.post('/update-profile', isAuthenticated(), requestValidationMiddleware(updateProfileSchema), UserController.updateProfile, responseValidationMiddleware(updateProfileSchema))
-userRouter.get('/transactions', isAuthenticated(), UserController.getTransactionHistory, responseValidationMiddleware({}))
+userRouter.get('/transactions', isAuthenticated(USER_ROLE.USER), UserController.getTransactionHistory, responseValidationMiddleware({}))
+userRouter.get('/get-users', isAuthenticated(USER_ROLE.ADMIN), UserController.getUsers, responseValidationMiddleware({}))
+userRouter.get('/user-transactions', isAuthenticated(USER_ROLE.ADMIN), UserController.getUserTransactionHistory, responseValidationMiddleware({}))
+
 export { userRouter }

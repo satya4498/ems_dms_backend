@@ -47,6 +47,10 @@ export const updateProfileSchema = {
       imageUrl: {
         type: 'string',
         format: 'uri'
+      },
+      description: {
+        type: 'string',
+        maxLength: 500
       }
     }
   },
@@ -79,6 +83,7 @@ export const updateProfileSchema = {
                 country: { type: 'string' },
                 zipCode: { type: 'string' },
                 role: { type: 'string' },
+                description: { type: 'string' },
                 isActive: { type: 'boolean' },
                 contactId: { type: 'string' },
                 fundAccountId: { type: 'string' },

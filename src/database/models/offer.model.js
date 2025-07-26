@@ -51,6 +51,21 @@ export default class Offer extends ModelBase {
       allowNull: false,
       defaultValue: true
     },
+    price: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+      comment: 'Price in cents'
+    },
+    productName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Product name'
+    },
+    productCategory: {
+      type: DataTypes.ENUM(['Royal', 'Ultima', 'Regular']),
+      allowNull: true,
+      comment: 'Product image'
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

@@ -118,6 +118,10 @@ export default class User extends ModelBase {
       allowNull: true,
       comment: 'RazorpayX fund account ID for payouts'
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

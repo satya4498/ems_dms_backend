@@ -1,19 +1,18 @@
 import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
-import { NumberPrecision } from '@src/libs/numberPrecision'
 import { AddBankAccountService } from '@src/services/razorpay/addBankAccount.service'
 
 const redeemQrCodeConstraints = ajv.compile({
   type: 'object',
   properties: {
-    qrCodeId: { type: 'string' },
+    code: { type: 'string' },
     userId: { type: 'string' },
     name: { type: 'string', minLength: 1, maxLength: 100 },
     ifsc: { type: 'string', minLength: 11, maxLength: 11 },
     accountNumber: { type: 'string', minLength: 9, maxLength: 18 }
   },
-  required: ['qrCodeId', 'userId']
+  required: ['code', 'userId']
 })
 
 export class RedeemQrCodeService extends ServiceBase {
@@ -23,12 +22,44 @@ export class RedeemQrCodeService extends ServiceBase {
 
   async run () {
     try {
-      const { qrCodeId, userId, name, ifsc, accountNumber } = this.args
+      const { code, userId, name, ifsc, accountNumber } = this.args
 
       // Check if user exists
       const user = await this.context.sequelize.models.user.findByPk(userId)
       if (!user) {
         return this.addError('UserNotFoundErrorType', 'User not found')
+      }
+
+      // Check if QR code exists and is valid
+      const qrCode = await this.context.sequelize.models.payoutQrCode.findOne({
+        where: { code }
+      })
+      if (!qrCode) {
+        return this.addError('QrCodeNotFoundErrorType', 'QR code not found')
+      }
+
+      // Check if user has already scanned this QR code
+      const existingRedemption = await this.context.sequelize.models.payoutQrCodeRedemption.findOne({
+        where: {
+          qrCodeId: qrCode.id,
+          userId
+        }
+      })
+
+      if (!existingRedemption) {
+        return this.addError('QrCodeNotScannedErrorType', 'QR code must be scanned first before requesting redemption')
+      }
+
+      if (existingRedemption.status === 'pending') {
+        return this.addError('RedemptionAlreadyPendingErrorType', 'Redemption request is already pending for this QR code')
+      }
+
+      if (existingRedemption.status === 'approved') {
+        return this.addError('RedemptionAlreadyApprovedErrorType', 'Redemption has already been approved for this QR code')
+      }
+
+      if (existingRedemption.status === 'rejected') {
+        return this.addError('RedemptionRejectedErrorType', 'Redemption has been rejected for this QR code')
       }
 
       // Create fund account if not already present
@@ -51,71 +82,12 @@ export class RedeemQrCodeService extends ServiceBase {
         context: { userId, fundAccountId }
       })
 
-      // Check if QR code exists and is valid
-      const qrCode = await this.context.sequelize.models.payoutQrCode.findByPk(qrCodeId)
-      if (!qrCode) {
-        return this.addError('QrCodeNotFoundErrorType', 'QR code not found')
-      }
+      // Update redemption status to pending
+      await existingRedemption.update({ status: 'pending' })
 
-      // Check if user has already redeemed this QR code
-      const existingRedemption = await this.context.sequelize.models.payoutQrCodeRedemption.findOne({
-        where: {
-          qrCodeId,
-          userId
-        }
-      })
-
-      if (existingRedemption) {
-        return { success: false, message: `This QR code has already redeemed by ${user?.firstNme}`, redemption: qrCodeId }
-      }
-
-      // Get user's wallet
-      const wallet = await this.context.sequelize.models.wallet.findOne({
-        where: { userId },
-        include: {
-          model: this.context.sequelize.models.currency
-        }
-      })
-
-      if (!wallet) {
-        return this.addError('WalletNotFoundErrorType', 'User wallet not found')
-      }
-
-      // Add balance to wallet immediately
-      const currentBalance = wallet.balance
-      const creditAmount = qrCode.amount
-      const newBalance = NumberPrecision.plus(currentBalance, creditAmount)
-
-      // Update wallet balance
-      await wallet.update({ balance: newBalance })
-
-      // Create transaction record for wallet credit
-      const transaction = await this.context.sequelize.models.transaction.create({
-        walletId: wallet.id,
-        amount: creditAmount,
-        type: 'credit',
-        reference: `QR_SCAN_${qrCode.id}`
-      })
-
-      // Create ledger entry for wallet credit
-      await this.context.sequelize.models.ledger.create({
-        transactionId: transaction.id,
-        walletId: wallet.id,
-        balanceBefore: currentBalance,
-        balanceAfter: newBalance
-      })
-
-      // Create redemption request with pending status
-      const redemption = await this.context.sequelize.models.payoutQrCodeRedemption.create({
-        qrCodeId,
-        userId,
-        status: 'pending',
-        redeemedAt: new Date()
-      })
-
-      // Fetch the created redemption with related data
+      // Fetch the updated redemption with related data
       const redemptionWithDetails = await this.context.sequelize.models.payoutQrCodeRedemption.findOne({
-        where: { id: redemption.id },
+        where: { id: existingRedemption.id },
         include: [
           {
             model: this.context.sequelize.models.payoutQrCode,
@@ -129,36 +101,23 @@ export class RedeemQrCodeService extends ServiceBase {
       })
 
       this.log.info('QR Code Redemption Request Created', {
-        message: 'QR code scanned and balance added to wallet. Redemption request created successfully.',
+        message: 'Redemption request created successfully for scanned QR code.',
         context: {
-          qrCodeId,
+          qrCodeId: qrCode.id,
           userId,
-          redemptionId: redemption.id,
-          amount: creditAmount,
-          oldBalance: currentBalance,
-          newBalance: newBalance
+          redemptionId: existingRedemption.id,
+          amount: qrCode.amount
         }
       })
 
       return {
         redemption: redemptionWithDetails,
-        wallet: {
-          id: wallet.id,
-          balance: newBalance,
-          currency: wallet.currency
-        },
-        transaction: {
-          id: transaction.id,
-          amount: creditAmount,
-          type: 'credit',
-          reference: transaction.reference
-        },
-        message: 'QR code scanned successfully! Balance added to wallet. Payout request submitted for admin approval.'
+        message: 'Redemption request submitted successfully for admin approval.'
       }
     } catch (err) {
       this.log.error('QR Code Redemption Failed', {
         message: err.message,
-        context: { qrCodeId: this.args.qrCodeId, userId: this.args.userId },
+        context: { code: this.args.code, userId: this.args.userId },
         exception: err
       })
       throw new APIError(err)

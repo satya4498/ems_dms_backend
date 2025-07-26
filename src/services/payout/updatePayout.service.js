@@ -10,7 +10,7 @@ const updatePayoutConstraints = ajv.compile({
     amount: { type: 'number', minimum: 1 },
     createdBy: { type: 'number' }
   },
-  required: ['id', 'code', 'amount', 'createdBy']
+  required: ['id', 'amount', 'createdBy']
 })
 
 export class UpdatePayoutService extends ServiceBase {
@@ -37,17 +37,17 @@ export class UpdatePayoutService extends ServiceBase {
       }
 
       // Check if new code already exists (excluding current QR code)
-      if (code !== qrCode.code) {
-        const existingCode = await this.context.sequelize.models.payoutQrCode.findOne({
-          where: { code, id: { [this.context.sequelize.Sequelize.Op.ne]: id } }
-        })
-        if (existingCode) {
-          return this.addError('CodeAlreadyExistsErrorType', 'QR code with this code already exists')
-        }
-      }
+      // if (code && code !== qrCode.code) {
+      //   const existingCode = await this.context.sequelize.models.payoutQrCode.findOne({
+      //     where: { code, id: { [this.context.sequelize.Sequelize.Op.ne]: id } }
+      //   })
+      //   if (existingCode) {
+      //     return this.addError('CodeAlreadyExistsErrorType', 'QR code with this code already exists')
+      //   }
+      // }
 
       // Update QR code
-      await qrCode.update({ code, amount })
+      await qrCode.update({ amount })
 
       // Fetch updated QR code with creator info
       const updatedQrCode = await this.context.sequelize.models.payoutQrCode.findOne({
