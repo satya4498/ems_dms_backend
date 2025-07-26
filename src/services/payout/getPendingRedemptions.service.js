@@ -1,14 +1,15 @@
 import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
-
+import { Op } from 'sequelize'
 const getPendingRedemptionsConstraints = ajv.compile({
   type: 'object',
   properties: {
     adminId: { type: 'string' },
     page: { type: 'number', minimum: 1, default: 1 },
     limit: { type: 'number', minimum: 1, maximum: 100, default: 10 },
-    status: { type: 'string', enum: ['pending', 'approved', 'rejected', 'all'] }
+    status: { type: 'string', enum: ['pending', 'approved', 'rejected', 'all'] },
+    search: { type: 'string', maxLength: 255 }
   },
   required: ['adminId']
 })
@@ -20,7 +21,7 @@ export class GetPendingRedemptionsService extends ServiceBase {
 
   async run () {
     try {
-      const { adminId, page = 1, limit = 10, status = 'all' } = this.args
+      const { adminId, page = 1, limit = 10, status = 'all', search } = this.args
 
       // Check if admin exists and has admin role
       const admin = await this.context.sequelize.models.user.findOne({
@@ -34,6 +35,14 @@ export class GetPendingRedemptionsService extends ServiceBase {
       const whereClause = {}
       if (status !== 'all') {
         whereClause.status = status
+      }
+      if (search) {
+        whereClause[Op.or] = [
+          { '$payoutQrCode.code$': { [Op.iLike]: `%${search}%` } },
+          { '$user.first_name$': { [Op.iLike]: `%${search}%` } },
+          { '$user.last_name$': { [Op.iLike]: `%${search}%` } },
+          { '$user.phone$': { [Op.iLike]: `%${search}%` } }
+        ]
       }
 
       // Calculate offset
