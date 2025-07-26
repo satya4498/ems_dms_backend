@@ -81,6 +81,7 @@ export const updateProfileSchema = {
                 role: { type: 'string' },
                 isActive: { type: 'boolean' },
                 contactId: { type: 'string' },
+                fundAccountId: { type: 'string' },
                 createdAt: { type: 'string' },
                 updatedAt: { type: 'string' },
                 wallet: {

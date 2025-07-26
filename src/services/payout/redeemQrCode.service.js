@@ -32,16 +32,24 @@ export class RedeemQrCodeService extends ServiceBase {
       }
 
       // Create fund account if not already present
-      const fundAccountId = user.fundAccountId
+      let fundAccountId = user.fundAccountId
       if (!fundAccountId) {
-        await AddBankAccountService.execute({
+        const result = await AddBankAccountService.execute({
           userId,
           contactId: user.contactId,
           name,
           ifsc,
           accountNumber
         }, this.context)
+        if (result.errors) {
+          return result
+        }
+        fundAccountId = result.data.fundAccountId
       }
+      this.log.info('Fund Account Created', {
+        message: 'Fund account created successfully',
+        context: { userId, fundAccountId }
+      })
 
       // Check if QR code exists and is valid
       const qrCode = await this.context.sequelize.models.payoutQrCode.findByPk(qrCodeId)

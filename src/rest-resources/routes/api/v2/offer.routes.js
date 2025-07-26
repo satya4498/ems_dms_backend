@@ -13,35 +13,35 @@ offerRouter.post('/',
   isAuthenticated(USER_ROLE.ADMIN),
   requestValidationMiddleware(createOfferSchema),
   OfferController.create,
-  responseValidationMiddleware(createOfferSchema)
+  responseValidationMiddleware({})
 )
 
 offerRouter.get('/',
   isAuthenticated(),
   requestValidationMiddleware(getOffersSchema),
   OfferController.getAll,
-  responseValidationMiddleware(getOffersSchema)
+  responseValidationMiddleware({})
 )
 
 offerRouter.get('/:id',
   isAuthenticated(),
   requestValidationMiddleware(getOfferSchema),
   OfferController.getById,
-  responseValidationMiddleware(getOfferSchema)
+  responseValidationMiddleware({})
 )
 
 offerRouter.put('/:id',
   isAuthenticated(USER_ROLE.ADMIN),
   requestValidationMiddleware(updateOfferSchema),
   OfferController.update,
-  responseValidationMiddleware(updateOfferSchema)
+  responseValidationMiddleware({})
 )
 
 offerRouter.delete('/:id',
   isAuthenticated(USER_ROLE.ADMIN),
   requestValidationMiddleware(deleteOfferSchema),
   OfferController.delete,
-  responseValidationMiddleware(deleteOfferSchema)
+  responseValidationMiddleware({})
 )
 
 export { offerRouter }

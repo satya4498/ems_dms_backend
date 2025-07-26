@@ -4,7 +4,8 @@ export const getPendingRedemptionsSchema = {
     properties: {
       page: { type: 'number', minimum: 1 },
       limit: { type: 'number', minimum: 1, maximum: 100 },
-      status: { type: 'string', enum: ['pending', 'approved', 'rejected', 'all'] }
+      status: { type: 'string', enum: ['pending', 'approved', 'rejected', 'all'] },
+      search: { type: 'string', maxLength: 255 }
     }
   },
   response: {

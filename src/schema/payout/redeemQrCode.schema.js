@@ -2,7 +2,11 @@ export const redeemQrCodeSchema = {
   body: {
     type: 'object',
     properties: {
-      qrCodeId: { type: 'string' }
+      qrCodeId: { type: 'string' },
+      userId: { type: 'string' },
+      name: { type: 'string', minLength: 1, maxLength: 100 },
+      ifsc: { type: 'string', minLength: 11, maxLength: 11 },
+      accountNumber: { type: 'string', minLength: 9, maxLength: 18 }
     },
     required: ['qrCodeId']
   },
