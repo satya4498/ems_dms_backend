@@ -76,6 +76,11 @@ const updateProfileConstraints = ajv.compile({
     imageUrl: {
       type: 'string',
       format: 'uri'
+    },
+    description: {
+      type: 'string',
+      maxLength: 500,
+      transform: ['trim']
     }
   },
   required: ['userId']
