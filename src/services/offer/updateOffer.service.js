@@ -8,11 +8,14 @@ const updateOfferConstraints = ajv.compile({
     id: { type: 'string' },
     title: { type: 'string', minLength: 1, maxLength: 255 },
     description: { type: 'string', maxLength: 1000 },
+    price: { type: 'number', minimum: 0 },
+    productName: { type: 'string', maxLength: 255 },
+    productCategory: { type: 'string', enum: ['Royal', 'Ultima', 'Regular'] },
     userId: { type: 'string' },
     updatedBy: { type: 'string' },
     validFrom: { type: 'string', format: 'date-time' },
     validTo: { type: 'string', format: 'date-time' },
-    isActive: { type: 'boolean' }
+    isActive: { type: 'boolean', default: true }
   },
   required: ['id', 'updatedBy']
 })
@@ -24,7 +27,7 @@ export class UpdateOfferService extends ServiceBase {
 
   async run () {
     try {
-      const { id, title, description, userId, updatedBy, validFrom, validTo, isActive } = this.args
+      const { id, title, description, userId, updatedBy, validFrom, validTo, isActive, price, productCategory, productName } = this.args
 
       // Check if updater exists and has admin role
       const updater = await this.context.sequelize.models.user.findOne({
@@ -56,6 +59,9 @@ export class UpdateOfferService extends ServiceBase {
       if (validFrom !== undefined) updateData.validFrom = validFrom ? new Date(validFrom) : null
       if (validTo !== undefined) updateData.validTo = validTo ? new Date(validTo) : null
       if (isActive !== undefined) updateData.isActive = isActive
+      if (price) updateData.price = price
+      if (productCategory) updateData.productCategory = productCategory
+      if (productName) updateData.productName = productName
 
       // Update the offer
       await existingOffer.update(updateData)

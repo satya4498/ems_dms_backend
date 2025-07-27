@@ -7,6 +7,9 @@ const createOfferConstraints = ajv.compile({
   properties: {
     title: { type: 'string', minLength: 1, maxLength: 255 },
     description: { type: 'string', maxLength: 1000 },
+    price: { type: 'number', minimum: 0 },
+    productName: { type: 'string', maxLength: 255 },
+    productCategory: { type: 'string', enum: ['Royal', 'Ultima', 'Regular'] },
     userId: { type: 'string' },
     createdBy: { type: 'string' },
     validFrom: { type: 'string', format: 'date-time' },
@@ -23,7 +26,7 @@ export class CreateOfferService extends ServiceBase {
 
   async run () {
     try {
-      const { title, description, userId, createdBy, validFrom, validTo, isActive = true } = this.args
+      const { title, description, userId, createdBy, validFrom, validTo, isActive = true, price, productCategory, productName } = this.args
 
       // Check if creator exists and has admin role
       const creator = await this.context.sequelize.models.user.findOne({
@@ -45,6 +48,9 @@ export class CreateOfferService extends ServiceBase {
       const offer = await this.context.sequelize.models.offer.create({
         title,
         description,
+        price,
+        productCategory,
+        productName,
         userId,
         createdBy,
         validFrom: validFrom ? new Date(validFrom) : null,

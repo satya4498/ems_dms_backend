@@ -5,6 +5,10 @@ export const createOfferSchema = {
       title: { type: 'string', minLength: 1, maxLength: 255 },
       description: { type: 'string', maxLength: 1000 },
       userId: { type: 'string' },
+      price: { type: 'number', minimum: 0 },
+      productName: { type: 'string', maxLength: 255 },
+      productCategory: { type: 'string', enum: ['Royal', 'Ultima', 'Regular'] },
+      createdBy: { type: 'string' },
       validFrom: { type: 'string', format: 'date-time' },
       validTo: { type: 'string', format: 'date-time' },
       isActive: { type: 'boolean', default: true }
