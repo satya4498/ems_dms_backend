@@ -11,14 +11,10 @@ export const updateOfferSchema = {
     properties: {
       title: { type: 'string', minLength: 1, maxLength: 255 },
       description: { type: 'string', maxLength: 1000 },
-      price: { type: 'number', minimum: 0 },
-      productName: { type: 'string', maxLength: 255 },
-      productCategory: { type: 'string', enum: ['Royal', 'Ultima', 'Regular'] },
-      updatedBy: { type: 'string' },
-      isActive: { type: 'boolean', default: true },
       userId: { type: 'string' },
       validFrom: { type: 'string', format: 'date-time' },
-      validTo: { type: 'string', format: 'date-time' }
+      validTo: { type: 'string', format: 'date-time' },
+      isActive: { type: 'boolean' }
     }
   },
   response: {
