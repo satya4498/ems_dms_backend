@@ -40,6 +40,10 @@ export default class Transaction extends ModelBase {
       type: DataTypes.STRING,
       allowNull: true
     },
+    status: {
+      type: DataTypes.ENUM('approved', 'rejected', 'pending'),
+      allowNull: true
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

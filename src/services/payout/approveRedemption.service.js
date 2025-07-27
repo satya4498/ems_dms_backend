@@ -67,7 +67,9 @@ export class ApproveRedemptionService extends ServiceBase {
       // If approved, process the payout
       let payoutDetails = null
       if (action === 'approve') {
-        payoutDetails = await this.processPayout(redemption)
+        payoutDetails = await this.processPayout(redemption, action)
+      } else if (action === 'reject') {
+        payoutDetails = await this.rejectPayout(redemption, action)
       }
 
       // Fetch updated redemption with details
@@ -114,7 +116,7 @@ export class ApproveRedemptionService extends ServiceBase {
     }
   }
 
-  async processPayout (redemption) {
+  async processPayout (redemption, action) {
     const { payoutQrCode, user } = redemption
 
     // Get user's wallet
@@ -160,7 +162,8 @@ export class ApproveRedemptionService extends ServiceBase {
       walletId: wallet.id,
       amount: payoutAmount,
       type: 'debit',
-      reference: `PAYOUT_${redemption.id}`
+      reference: `PAYOUT_${redemption.id}`,
+      status: action === 'approve' ? 'approved' : 'rejected'
     })
 
     // Create ledger entry for wallet debit
@@ -239,5 +242,86 @@ export class ApproveRedemptionService extends ServiceBase {
     })
 
     return response.data
+  }
+
+  async rejectPayout (redemption, action) {
+    const { payoutQrCode, user } = redemption
+
+    // Get user's wallet
+    const wallet = await this.context.sequelize.models.wallet.findOne({
+      where: { userId: user.id },
+      include: {
+        model: this.context.sequelize.models.currency
+      }
+    })
+
+    if (!wallet) {
+      return this.addError('WalletNotFoundErrorType', 'User wallet not found')
+    }
+
+    // Check if user has sufficient balance
+    if (wallet.balance < payoutQrCode.amount) {
+      return this.addError('InsufficientBalanceErrorType', 'Insufficient wallet balance for payout')
+    }
+
+    // Check if user has contactId and fundAccountId for RazorpayX
+    if (!user.contactId) {
+      return this.addError('UserContactNotFoundErrorType', 'User contact not found. Please add contact first.')
+    }
+
+    if (!user.fundAccountId) {
+      const fundAccounts = await this.getUserFundAccounts(user.contactId)
+      if (fundAccounts.length === 0) {
+        return this.addError('UserFundAccountNotFoundErrorType', 'No fund accounts found for user. Please add a fund account first.')
+      }
+      user.fundAccountId = fundAccounts[0].id // Use the first fund account
+    }
+
+    // Debit wallet first
+    const currentBalance = wallet.balance
+    const payoutAmount = payoutQrCode.amount
+    const newBalance = NumberPrecision.minus(currentBalance, payoutAmount)
+
+    // Update wallet balance
+    await wallet.update({ balance: newBalance })
+
+    // Create transaction record for wallet debit
+    const debitTransaction = await this.context.sequelize.models.transaction.create({
+      walletId: wallet.id,
+      amount: payoutAmount,
+      type: 'debit',
+      reference: `PAYOUT_REJECTED_${redemption.id}`,
+      status: action === 'reject' ? 'rejected' : 'approved'
+    })
+
+    // Create ledger entry for wallet debit
+    await this.context.sequelize.models.ledger.create({
+      transactionId: debitTransaction.id,
+      walletId: wallet.id,
+      balanceBefore: currentBalance,
+      balanceAfter: newBalance
+    })
+
+    this.log.info('Payout Rejected', {
+      message: 'Wallet debited and payout rejected successfully',
+      context: {
+        userId: user.id,
+        amount: payoutAmount,
+        oldBalance: currentBalance,
+        newBalance: newBalance,
+        redemptionId: redemption.id
+        // payoutId: payoutResponse.id
+      }
+    })
+
+    return {
+      walletDebit: {
+        transactionId: debitTransaction.id,
+        amount: payoutAmount,
+        oldBalance: currentBalance,
+        newBalance: newBalance
+      }
+      // razorpayPayout: payoutResponse
+    }
   }
 }
