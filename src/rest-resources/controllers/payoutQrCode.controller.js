@@ -69,20 +69,6 @@ export class PayoutQrCodeController {
   * @param {import('express').Response} res
   * @param {import('express').NextFunction} next
   */
-  static async approvePayout (req, res, next) {
-    try {
-      const result = await ApproveRedemptionService.execute({ ...req.body, adminId: req.authenticated.userId }, req.context)
-      decorateResponse({ req, res, next }, result)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  /**
-  * @param {import('express').Request} req
-  * @param {import('express').Response} res
-  * @param {import('express').NextFunction} next
-  */
   static async validateQrCode (req, res, next) {
     try {
       const result = await ValidateQrCodeService.execute({ ...req.body, userId: req.authenticated.userId }, req.context)
