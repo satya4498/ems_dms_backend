@@ -30,9 +30,6 @@ This is our Node.js base project (Admin-end) serves as a robust foundation for d
 
 ## Features
 
-- Content Management
-- Casino Management
-- SportBook Management
-- Odd Modification
-- Bonus Management
-- Reports Management
+- User Management
+- Offer Management
+- QR Code Management
