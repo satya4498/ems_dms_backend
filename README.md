@@ -1,7 +1,7 @@
 
 # Jagdamba
 
-This is our Node.js base project (Admin-end) serves as a robust foundation for developing scalable and efficient web applications. With a focus on performance and modularity, it provides essential tools and architecture, empowering developers to rapidly create and deploy feature-rich web solutions.
+This is our Node.js base project serves as a robust foundation for developing scalable and efficient web applications. With a focus on performance and modularity, it provides essential tools and architecture, empowering developers to rapidly create and deploy feature-rich web solutions.
 ## Installation
 
 - Node JS version Used is >=18.13.0 & <18.16.2
