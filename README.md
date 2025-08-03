@@ -1,10 +1,10 @@
 
-# Arc
+# Jagdamba
 
-This is our Node.js base project (Admin-end) serves as a robust foundation for developing scalable and efficient web applications. With a focus on performance and modularity, it provides essential tools and architecture, empowering developers to rapidly create and deploy feature-rich web solutions.
+This is our Node.js base project serves as a robust foundation for developing scalable and efficient web applications. With a focus on performance and modularity, it provides essential tools and architecture, empowering developers to rapidly create and deploy feature-rich web solutions.
 ## Installation
 
-- Node JS version Used is >=16.13.0 & <16.16.2
+- Node JS version Used is >=18.13.0 & <18.16.2
 
 ## How to run application in Dev mode (locally)
 - First copy .env.sample file to .env and fill the all env variables (NODE_ENV = 'development')
@@ -30,9 +30,6 @@ This is our Node.js base project (Admin-end) serves as a robust foundation for d
 
 ## Features
 
-- Content Management
-- Casino Management
-- SportBook Management
-- Odd Modification
-- Bonus Management
-- Reports Management
+- User Management
+- Offer Management
+- QR Code Management
