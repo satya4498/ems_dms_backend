@@ -1,5 +1,5 @@
 import { sequelize } from '@src/database/models'
-import { serverDayjs } from '@src/libs/dayjs'
+import { dayjs } from '@src/libs/dayjs'
 import _ from 'lodash'
 import { Op } from 'sequelize'
 import { COLUMNS_TO_EXCLUDE } from '@src/utils/constants/public.constants.utils'
@@ -13,9 +13,9 @@ import { PassThrough } from 'stream'
  */
 export function alignDatabaseDateFilter (startDate, endDate) {
   let filterObj = {}
-  if (startDate && endDate) filterObj = { [Op.and]: [{ [Op.gte]: serverDayjs(startDate).format() }, { [Op.lte]: serverDayjs(endDate).format() }] }
-  else if (endDate) filterObj = { [Op.lte]: serverDayjs(endDate).format() }
-  else if (startDate) filterObj = { [Op.gte]: serverDayjs(startDate).format() }
+  if (startDate && endDate) filterObj = { [Op.and]: [{ [Op.gte]: dayjs(startDate).format() }, { [Op.lte]: dayjs(endDate).format() }] }
+  else if (endDate) filterObj = { [Op.lte]: dayjs(endDate).format() }
+  else if (startDate) filterObj = { [Op.gte]: dayjs(startDate).format() }
 
   return filterObj
 }
@@ -55,8 +55,8 @@ export function pickChildPermissiosFromParentPermissions (childPermissions, pare
 export function getExpireAt (key, previousExpireAt = null) {
   const timeUnit = key.includes('daily') ? 'd' : key.includes('weekly') ? 'w' : key.includes('monthly') ? 'M' : null
   if (!timeUnit) throw Error('Invalid time unit')
-  if (!previousExpireAt) return serverDayjs().add(1, timeUnit).format()
-  return serverDayjs().add(serverDayjs().diff(previousExpireAt, timeUnit) + 1, timeUnit).format()
+  if (!previousExpireAt) return dayjs().add(1, timeUnit).format()
+  return dayjs().add(dayjs().diff(previousExpireAt, timeUnit) + 1, timeUnit).format()
 }
 
 /**

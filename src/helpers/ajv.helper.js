@@ -5,7 +5,7 @@ import ajv from '@src/libs/ajv'
  * @param {[typeof import('sequelize').Model]} models
  * @returns {void}
 */
-export function addModelsSchemaToAjv(models) {
+export function addModelsSchemaToAjv (models) {
   const schemaManager = new JsonSchemaManager()
   const strategy = new JsonSchema7Strategy()
 
