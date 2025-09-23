@@ -15,17 +15,17 @@ const mailjet = new Mailjet({
  * @param {string} name
  * @returns {boolean}
  */
-export async function sendEmail (email, name, subject, HTMLTemplate,attachment) {
+export async function sendEmail (email, name, subject, HTMLTemplate, attachment) {
   try {
     let Attachments
-    if(attachment && attachment.contentType==='text/csv'){
-      let content = attachment?.content?.toString("base64")
+    if (attachment && attachment.contentType === 'text/csv') {
+      const content = attachment?.content?.toString('base64')
       Attachments = [
         {
           ContentType: attachment.contentType,
           Filename: attachment.filename,
-          Base64Content: content,
-        },
+          Base64Content: content
+        }
       ]
     }
     const response = await mailjet.post('send', { version: 'v3.1' }).request({

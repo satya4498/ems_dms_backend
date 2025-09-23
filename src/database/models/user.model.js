@@ -35,7 +35,13 @@ export default class User extends ModelBase {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+        len: [5, 255]
+      },
+      comment: 'Email address of the user'
     },
     phoneCode: {
       type: DataTypes.STRING,
@@ -43,7 +49,7 @@ export default class User extends ModelBase {
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true,
       validate: {
         len: [10, 15]

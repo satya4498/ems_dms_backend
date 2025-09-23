@@ -51,7 +51,13 @@ export const updateProfileSchema = {
       description: {
         type: 'string',
         maxLength: 500
-      }
+      },
+      phone: {
+        type: 'string',
+        minLength: 10,
+        maxLength: 15
+      },
+      userId: { type: 'string' }
     }
   },
   response: {

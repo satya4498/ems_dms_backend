@@ -12,9 +12,10 @@ const verifyOtpConstraints = ajv.compile({
   properties: {
     phoneNumber: { type: 'string', minLength: 10, maxLength: 15 },
     otp: { type: 'string', minLength: 4, maxLength: 10 },
+    email: { type: 'string', format: 'email' },
     sId: { type: 'string' }
   },
-  required: ['otp', 'phoneNumber']
+  required: ['otp', 'email']
 })
 
 export class VerifyOtpService extends ServiceBase {
@@ -23,24 +24,23 @@ export class VerifyOtpService extends ServiceBase {
   }
 
   async run () {
-    const { phoneNumber, otp } = this.args
+    const { email, otp } = this.args
 
     try {
       // const client = twilio(appConfig.twilio.accountSid, appConfig.twilio.authToken)
       // const response = await client.verify.v2.services(appConfig.twilio.serviceSid)
       //   .verificationChecks
       //   .create({ code: otp, verificationSid: sId })
-      const cachedOtpData = await Cache.get(`otp:${phoneNumber}`)
+      const cachedOtpData = await Cache.get(`otp:${email}`)
       if (cachedOtpData.otp === Number(otp)) {
         // Find or create user
         let isNewUser = false
-        const phoneCode = phoneNumber.split('+91')[0]
-        const phoneNumberWithoutCode = phoneNumber.split('+91')[1]
-        let user = await this.context.sequelize.models.user.findOne({ where: { phone: phoneNumberWithoutCode } })
+        // const phoneCode = phoneNumber.split('+91')[0]
+        // const phoneNumberWithoutCode = phoneNumber.split('+91')[1]
+        let user = await this.context.sequelize.models.user.findOne({ where: { email } })
         if (!user) {
           user = await this.context.sequelize.models.user.create({
-            phone: phoneNumberWithoutCode,
-            phoneCode: phoneCode
+            email
           })
 
           // Create wallet for the user in default currency
@@ -58,7 +58,7 @@ export class VerifyOtpService extends ServiceBase {
 
         // Generate JWT token
         const token = jwt.sign(
-          { userId: user.id, phone: user.phone, role: user.role, phoneCode: user.phoneCode, isNewUser, type: JWT_TOKEN_TYPES.LOGIN },
+          { userId: user.id, email: user.email, role: user.role, isNewUser, type: JWT_TOKEN_TYPES.LOGIN },
           appConfig.jwt.secret,
           { expiresIn: appConfig.jwt.expiry }
         )
