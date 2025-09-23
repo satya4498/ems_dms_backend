@@ -81,9 +81,15 @@ const updateProfileConstraints = ajv.compile({
       type: 'string',
       maxLength: 500,
       transform: ['trim']
+    },
+    phone: {
+      type: 'string',
+      minLength: 10,
+      maxLength: 15
     }
   },
-  required: ['userId']
+  required: ['userId', 'firstName', 'lastName', 'phone'],
+  additionalProperties: false
 })
 
 export class UpdateProfileService extends ServiceBase {
@@ -112,7 +118,7 @@ export class UpdateProfileService extends ServiceBase {
           {
             userId,
             name: `${cleanUpdateData.firstName || existingUser.firstName} ${cleanUpdateData.lastName || existingUser.lastName}`,
-            contact: existingUser.phone
+            contact: cleanUpdateData.phone || existingUser.phone
           }, this.context)
       }
 
