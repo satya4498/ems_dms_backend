@@ -56,6 +56,7 @@ export class VerifyOtpService extends ServiceBase {
           isNewUser = true
         }
 
+        if (!user.firstName && !user.lastName && !user.phone) isNewUser = true
         // Generate JWT token
         const token = jwt.sign(
           { userId: user.id, email: user.email, role: user.role, isNewUser, type: JWT_TOKEN_TYPES.LOGIN },
