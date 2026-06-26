@@ -1,20 +1,22 @@
 module.exports = {
   apps: [{
-    script: 'npm run start:dev',
+    script: 'npm run start',
     name: 'Satyam-Admin',
-    watch: '.',
-    ignore_watch: ['./logs', 'node_modules', 'logs/*', './src/locals/*']
+    watch: false,
+    env: {
+      NODE_ENV: 'production'
+    }
   }],
 
   deploy: {
     production: {
-      user: 'SSH_USERNAME',
-      host: 'SSH_HOSTMACHINE',
-      ref: 'origin/master',
-      repo: 'GIT_REPOSITORY',
-      path: 'DESTINATION_PATH',
+      user: process.env.SSH_USERNAME || 'SSH_USERNAME',
+      host: process.env.SSH_HOSTMACHINE || 'SSH_HOSTMACHINE',
+      ref: process.env.GIT_REF || 'origin/main',
+      repo: process.env.GIT_REPOSITORY || 'GIT_REPOSITORY',
+      path: process.env.DESTINATION_PATH || '/var/www/satyam-admin',
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+      'post-deploy': 'npm install --production=false && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }
