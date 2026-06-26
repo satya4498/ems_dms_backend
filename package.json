@@ -1,11 +1,11 @@
 {
-  "name": "admin-backend",
+  "name": "dms-backend",
   "version": "1.0.0",
-  "description": "Backend for admin related APIs",
+  "description": "Backend for dms system APIs",
   "main": "index.js",
   "engines": {
-    "node": "v18.18.0",
-    "npm": "9.8.1"
+    "node": ">=20 <21",
+    "npm": ">=10 <11"
   },
   "scripts": {
     "babel-node": "babel-node --inspect=0.0.0.0:9229",
@@ -65,17 +65,17 @@
     "winston": "3.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "latest",
-    "@babel/core": "latest",
-    "@babel/eslint-parser": "latest",
-    "@babel/node": "latest",
-    "@babel/preset-env": "latest",
-    "babel-plugin-module-resolver": "latest",
-    "eslint": "7.12.1",
+    "@babel/cli": "8.0.0",
+    "@babel/core": "8.0.0",
+    "@babel/eslint-parser": "8.0.1",
+    "@babel/node": "8.0.0",
+    "@babel/preset-env": "8.0.0",
+    "babel-plugin-module-resolver": "5.0.3",
+    "eslint": "9.17.0",
     "husky": "7.0.4",
     "lint-staged": "12.1.2",
     "nodemon": "3.0.2",
-    "standard": "16.0.4"
+    "standard": "17.0.0"
   },
   "standard": {
     "parser": "@babel/eslint-parser",

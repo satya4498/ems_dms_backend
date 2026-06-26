@@ -1,4 +1,4 @@
-FROM public.ecr.aws/z0i0t4e6/docker-images:node.18.18.0-alpine AS builder
+FROM public.ecr.aws/z0i0t4e6/docker-images:node.20.11.1-alpine AS builder
 
 # install dependecies
 RUN apk update
