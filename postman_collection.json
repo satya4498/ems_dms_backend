@@ -1,0 +1,635 @@
+{
+  "info": {
+    "name": "Jagdamba Backend API",
+    "description": "Complete API collection for Jagdamba Backend with user management, QR code payouts, RazorpayX integration, and offer management",
+    "version": "2.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "qrCodeId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "redemptionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "offerId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health-check",
+              "host": ["{{baseUrl}}"],
+              "path": ["health-check"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+919876543210\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/user/send-otp",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "user", "send-otp"]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+919876543210\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/user/verify-otp",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "user", "verify-otp"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.token) {",
+                  "        pm.collectionVariables.set('authToken', response.data.token);",
+                  "        pm.collectionVariables.set('userId', response.data.user.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/user/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "user", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"dateOfBirth\": \"1990-01-01\",\n  \"gender\": \"male\",\n  \"address\": \"123 Main Street\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"zipCode\": \"400001\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/user/update-profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "user", "update-profile"]
+            }
+          }
+        },
+        {
+          "name": "Get Transaction History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/user/transactions?page=1&limit=10&type=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "user", "transactions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "type",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QR Code Payout System",
+      "item": [
+        {
+          "name": "Create QR Code (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"QR_123456789\",\n  \"amount\": 1000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/payout/create",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "payout", "create"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.id) {",
+                  "        pm.collectionVariables.set('qrCodeId', response.data.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get All QR Codes (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/payout?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "payout"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update QR Code (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"{{qrCodeId}}\",\n  \"code\": \"QR_123456789_UPDATED\",\n  \"amount\": 1500\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/payout/update",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "payout", "update"]
+            }
+          }
+        },
+        {
+          "name": "Delete QR Code (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payoutQrCodeId\": \"{{qrCodeId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/payout/delete",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "payout", "delete"]
+            }
+          }
+        },
+        {
+          "name": "Redeem QR Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qrCodeId\": \"{{qrCodeId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/redeem",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "redeem"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.redemption && response.data.redemption.id) {",
+                  "        pm.collectionVariables.set('redemptionId', response.data.redemption.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Pending Redemptions (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/redemptions?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "redemptions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve/Reject Redemption (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"redemptionId\": \"{{redemptionId}}\",\n  \"action\": \"approve\",\n  \"remarks\": \"Approved after verification\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/redemptions/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "redemptions", "approve"]
+            }
+          }
+        },
+        {
+          "name": "Get All Redemptions (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/payout/redemptions?page=1&limit=10&status=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "payout", "redemptions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "RazorpayX Integration",
+      "item": [
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"contact\": \"+919876543210\",\n  \"type\": \"customer\",\n  \"reference_id\": \"{{userId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/razorpay/contacts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "razorpay", "contacts"]
+            }
+          }
+        },
+        {
+          "name": "Add Bank Account to Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contactId\": \"cont_1234567890\",\n  \"name\": \"John Doe\",\n  \"ifsc\": \"SBIN0001234\",\n  \"accountNumber\": \"1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/razorpay/contacts/bank-accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "razorpay", "contacts", "bank-accounts"]
+            }
+          }
+        },
+        {
+          "name": "Get Contact Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/razorpay/contacts/cont_1234567890",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "razorpay", "contacts", "cont_1234567890"]
+            }
+          }
+        },
+        {
+          "name": "Create Payout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contactId\": \"cont_1234567890\",\n  \"accountNumber\": \"1234567890\",\n  \"amount\": 1000,\n  \"currency\": \"INR\",\n  \"mode\": \"IMPS\",\n  \"purpose\": \"payout\",\n  \"queue_if_low_balance\": true,\n  \"reference_id\": \"payout_1234567890\",\n  \"narration\": \"Payout for QR code redemption\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/razorpay/payouts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "razorpay", "payouts"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Offer Management",
+      "item": [
+        {
+          "name": "Create Offer (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Welcome Bonus\",\n  \"description\": \"Get 100% bonus on your first deposit\",\n  \"userId\": \"{{userId}}\",\n  \"validFrom\": \"2024-01-01T00:00:00Z\",\n  \"validTo\": \"2024-12-31T23:59:59Z\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/offer/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "offer", ""]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.offer && response.data.offer.id) {",
+                  "        pm.collectionVariables.set('offerId', response.data.offer.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get All Offers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/offer/?page=1&limit=10&search=bonus&isActive=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "offer", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": "bonus"
+                },
+                {
+                  "key": "isActive",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Offer by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/offer/{{offerId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "offer", "{{offerId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Offer (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Welcome Bonus\",\n  \"description\": \"Get 150% bonus on your first deposit\",\n  \"isActive\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/offer/{{offerId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "offer", "{{offerId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Offer (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/offer/{{offerId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v2", "offer", "{{offerId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set default headers",
+          "pm.request.headers.add({",
+          "    key: 'Accept',",
+          "    value: 'application/json'",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test script",
+          "pm.test('Status code is 200 or 201', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+          "});",
+          "",
+          "pm.test('Response has data property', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('data');",
+          "});",
+          "",
+          "pm.test('Response has errors array', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('errors');",
+          "    pm.expect(response.errors).to.be.an('array');",
+          "});"
+        ]
+      }
+    }
+  ]
+}
