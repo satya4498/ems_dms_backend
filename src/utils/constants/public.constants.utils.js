@@ -11,7 +11,7 @@ export const SETTING_DATA_TYPES = {
 export const USER_GENDER = {
   MALE: 'male',
   FEMALE: 'female',
-  UNKNOWN: 'unknown'
+  TRANSGENDER: 'trans'
 }
 // User constants end
 export const USER_ROLE = {

@@ -1,5 +1,0 @@
-export { createOfferSchema } from './createOffer.schema'
-export { getOffersSchema } from './getOffers.schema'
-export { getOfferSchema } from './getOffer.schema'
-export { updateOfferSchema } from './updateOffer.schema'
-export { deleteOfferSchema } from './deleteOffer.schema'

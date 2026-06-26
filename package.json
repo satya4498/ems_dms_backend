@@ -10,7 +10,7 @@
   "scripts": {
     "babel-node": "babel-node --inspect=0.0.0.0:9229",
     "build": "babel . -d dist --copy-files --delete-dir-on-start",
-    "start": "npm run db:populate && node ./dist/index",
+    "start": "node ./dist/index",
     "start:dev": "nodemon --exec npm run babel-node -- ./index.js",
     "lint": "standard --fix",
     "db:migrate": "sequelize db:migrate",

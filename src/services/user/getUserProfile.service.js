@@ -21,13 +21,7 @@ export class GetUserProfileService extends ServiceBase {
       const { userId } = this.args
 
       const user = await this.context.sequelize.models.user.findOne({
-        where: { id: userId },
-        include: {
-          model: this.context.sequelize.models.wallet,
-          include: {
-            model: this.context.sequelize.models.currency
-          }
-        }
+        where: { id: userId }
       })
       if (!user) return this.addError('UserNotFoundErrorType', 'User not found')
 

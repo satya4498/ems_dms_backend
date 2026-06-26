@@ -142,9 +142,9 @@ export default class User extends ModelBase {
 
   static associate (models) {
     super.associate()
-    this.hasMany(models.payoutQrCode, { foreignKey: 'createdBy' })
-    this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'userId' })
-    this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'adminId', as: 'adminRedemptions' })
-    this.hasOne(models.wallet, { foreignKey: 'userId' })
+    // this.hasMany(models.payoutQrCode, { foreignKey: 'createdBy' })
+    // this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'userId' })
+    // this.hasMany(models.payoutQrCodeRedemption, { foreignKey: 'adminId', as: 'adminRedemptions' })
+    // this.hasOne(models.wallet, { foreignKey: 'userId' })
   }
 }
