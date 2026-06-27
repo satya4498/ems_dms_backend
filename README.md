@@ -37,3 +37,4 @@ This is our Node.js base project serves as a robust foundation for developing sc
 - Offer Management
 - QR Code Management
 >>>>>>> development
+# ems_dms_backend
