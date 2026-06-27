@@ -60,6 +60,11 @@ export default class User extends ModelBase {
       type: DataTypes.BOOLEAN,
       allowNull: true
     },
+    emailVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     dateOfBirth: {
       type: DataTypes.DATE,
       allowNull: true
@@ -98,6 +103,10 @@ export default class User extends ModelBase {
       allowNull: true
     },
     country: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    password: {
       type: DataTypes.STRING,
       allowNull: true
     },

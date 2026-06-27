@@ -404,6 +404,26 @@ const config = convict({
       default: '',
       env: 'RAZORPAYX_ACCOUNT_NUMBER'
     }
+  },
+  resend: {
+    apiKey: {
+      doc: 'Resend API key',
+      format: String,
+      default: '',
+      env: 'RESEND_API_KEY'
+    },
+    senderEmail: {
+      doc: 'Resend sender email',
+      format: String,
+      default: 'onboarding@resend.dev',
+      env: 'RESEND_SENDER_EMAIL'
+    },
+    senderName: {
+      doc: 'Resend sender name',
+      format: String,
+      default: 'DMS',
+      env: 'RESEND_SENDER_NAME'
+    }
   }
 })
 config.validate({ allowed: 'strict' })

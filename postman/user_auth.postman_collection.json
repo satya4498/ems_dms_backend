@@ -1,0 +1,312 @@
+{
+  "info": {
+    "name": "DMS - User Auth APIs",
+    "description": "User authentication and email verification APIs for DMS backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api/v2",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "reset_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign Up",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.data && res.data.accessToken) {",
+                  "  pm.collectionVariables.set('access_token', res.data.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"Test@1234\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"9876543210\",\n  \"phoneCode\": \"+91\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/sign-up",
+              "host": ["{{base_url}}"],
+              "path": ["user", "sign-up"]
+            },
+            "description": "Register a new user with email and password. Returns a JWT access token on success."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"user\": {\n      \"id\": \"1\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"email\": \"john@example.com\",\n      \"phone\": \"9876543210\",\n      \"phoneCode\": \"+91\",\n      \"role\": \"user\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "Email Already Exists",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"EmailAlreadyExistsErrorType\",\n      \"description\": \"EMAIL_ALREADY_EXISTS\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Sign In",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.data && res.data.accessToken) {",
+                  "  pm.collectionVariables.set('access_token', res.data.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"Test@1234\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/sign-in",
+              "host": ["{{base_url}}"],
+              "path": ["user", "sign-in"]
+            },
+            "description": "Login with email and password. Returns a JWT access token. The token is automatically saved to the collection variable `access_token`."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"user\": {\n      \"id\": \"1\",\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"email\": \"john@example.com\",\n      \"phone\": null,\n      \"phoneCode\": null,\n      \"role\": \"user\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "Invalid Password",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"InvalidPasswordErrorType\",\n      \"description\": \"INVALID_PASSWORD\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "User Not Found",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"UserNotFoundErrorType\",\n      \"description\": \"User not found\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Forgot Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.data && res.data.resetToken) {",
+                  "  pm.collectionVariables.set('reset_token', res.data.resetToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/forgot-password",
+              "host": ["{{base_url}}"],
+              "path": ["user", "forgot-password"]
+            },
+            "description": "Sends a password reset link to the user's email. In development mode, the reset token is also returned in the response and auto-saved to the `reset_token` variable."
+          },
+          "response": [
+            {
+              "name": "Success (Dev mode)",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"message\": \"Password reset link sent to your email\",\n    \"resetToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "User Not Found",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"UserNotFoundErrorType\",\n      \"description\": \"User not found\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{reset_token}}\",\n  \"password\": \"NewPass@5678\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/reset-password",
+              "host": ["{{base_url}}"],
+              "path": ["user", "reset-password"]
+            },
+            "description": "Reset the user's password using the token received from forgot-password. The `{{reset_token}}` variable is auto-filled if you ran Forgot Password first."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"message\": \"Password reset successfully\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "Invalid or Expired Token",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"InvalidTokenErrorType\",\n      \"description\": \"INVALID_TOKEN\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Email Verification",
+      "item": [
+        {
+          "name": "Send Email OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/send-email-otp",
+              "host": ["{{base_url}}"],
+              "path": ["user", "send-email-otp"]
+            },
+            "description": "Sends a 6-digit OTP to the user's email. OTP expires in 10 minutes. In dev mode, emails go to freelancer.8510@gmail.com."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"message\": \"OTP sent to your email\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "Already Verified",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"EmailAlreadyVerifiedErrorType\",\n      \"description\": \"Email is already verified\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "User Not Found",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"UserNotFoundErrorType\",\n      \"description\": \"User not found\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Verify Email OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"481203\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/user/verify-email-otp",
+              "host": ["{{base_url}}"],
+              "path": ["user", "verify-email-otp"]
+            },
+            "description": "Verifies the 6-digit OTP sent to the user's email. On success, sets email_verified = true and deletes the OTP from Redis."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"message\": \"Email verified successfully\"\n  },\n  \"errors\": []\n}"
+            },
+            {
+              "name": "Invalid OTP",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"InvalidTokenErrorType\",\n      \"description\": \"Invalid OTP\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "OTP Expired",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {},\n  \"errors\": [\n    {\n      \"name\": \"InvalidTokenErrorType\",\n      \"description\": \"OTP expired or not found\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
