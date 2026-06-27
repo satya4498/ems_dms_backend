@@ -12,6 +12,7 @@
     "build": "babel . -d dist --copy-files --delete-dir-on-start",
     "start": "node ./dist/index",
     "start:dev": "nodemon --exec npm run babel-node -- ./index.js",
+    "test": "node --test",
     "lint": "standard --fix",
     "db:migrate": "sequelize db:migrate",
     "db:seed": "sequelize db:seed:all",
