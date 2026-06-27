@@ -16,6 +16,11 @@ export const updateProfileSchema = {
         type: 'string',
         format: 'email'
       },
+      phoneCode: {
+        type: 'string',
+        minLength: 1,
+        maxLength: 10
+      },
       dateOfBirth: {
         type: 'string',
         format: 'date'
@@ -58,7 +63,8 @@ export const updateProfileSchema = {
         maxLength: 15
       },
       userId: { type: 'string' }
-    }
+    },
+    additionalProperties: false
   },
   response: {
     200: {
@@ -91,33 +97,8 @@ export const updateProfileSchema = {
                 role: { type: 'string' },
                 description: { type: 'string' },
                 isActive: { type: 'boolean' },
-                contactId: { type: 'string' },
-                fundAccountId: { type: 'string' },
                 createdAt: { type: 'string' },
                 updatedAt: { type: 'string' },
-                wallet: {
-                  type: 'object',
-                  properties: {
-                    id: { type: 'string' },
-                    userId: { type: 'string' },
-                    currencyId: { type: 'string' },
-                    balance: { type: 'number' },
-                    createdAt: { type: 'string' },
-                    updatedAt: { type: 'string' },
-                    currency: {
-                      type: 'object',
-                      properties: {
-                        id: { type: 'string' },
-                        code: { type: 'string' },
-                        name: { type: 'string' },
-                        symbol: { type: 'string' },
-                        isActive: { type: 'boolean' },
-                        createdAt: { type: 'string' },
-                        updatedAt: { type: 'string' }
-                      }
-                    }
-                  }
-                }
               }
             },
             message: { type: 'string' }
@@ -128,3 +109,6 @@ export const updateProfileSchema = {
     }
   }
 }
+
+export const updateProfileBodySchema = updateProfileSchema.body
+export const updateProfileResponseSchema = updateProfileSchema.response

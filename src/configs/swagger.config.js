@@ -53,7 +53,8 @@ export const swaggerSpec = {
   },
   tags: [
     { name: 'Auth', description: 'Authentication APIs' },
-    { name: 'Email Verification', description: 'Email OTP verification APIs' }
+    { name: 'Email Verification', description: 'Email OTP verification APIs' },
+    { name: 'User Management', description: 'User management APIs' }
   ],
   paths: {
     '/user/sign-up': {
@@ -411,6 +412,199 @@ export const swaggerSpec = {
                     value: { data: {}, errors: [{ name: 'InvalidTokenErrorType', description: 'OTP expired or not found' }] }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    '/user/profile': {
+      get: {
+        tags: ['User Management'],
+        summary: 'Get the profile of the authenticated user',
+        security: [{ bearerAuth: [] }],
+        responses: {
+          200: {
+            description: 'Profile retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    data: { $ref: '#/components/schemas/UserObject' },
+                    errors: { type: 'array', items: {}, example: [] }
+                  }
+                }
+              }
+            }
+          },
+          401: {
+            description: 'Unauthorized access',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/ErrorResponse' },
+                example: { data: {}, errors: [{ name: 'UnauthorizedErrorType', description: 'Unauthorized access' }] }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    '/user/get-users': {
+      get: {
+        tags: ['User Management'],
+        summary: 'Get a paginated list of users with optional search',
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'page',
+            in: 'query',
+            description: 'Page number (default is 1)',
+            required: false,
+            schema: { type: 'number', minimum: 1, default: 1 }
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            description: 'Number of users per page (default is 10, max is 1000)',
+            required: false,
+            schema: { type: 'number', minimum: 1, maximum: 1000, default: 10 }
+          },
+          {
+            name: 'search',
+            in: 'query',
+            description: 'Search term to filter users by first name, last name, email, or phone',
+            required: false,
+            schema: { type: 'string', maxLength: 255 }
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Users retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    data: {
+                      type: 'object',
+                      properties: {
+                        users: {
+                          type: 'array',
+                          items: { $ref: '#/components/schemas/UserObject' }
+                        },
+                        total: { type: 'number', example: 100 },
+                        page: { type: 'number', example: 1 },
+                        limit: { type: 'number', example: 10 }
+                      }
+                    },
+                    errors: { type: 'array', items: {}, example: [] }
+                  }
+                }
+              }
+            }
+          },
+          401: {
+            description: 'Unauthorized access',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/ErrorResponse' },
+                example: { data: {}, errors: [{ name: 'UnauthorizedErrorType', description: 'Unauthorized access' }] }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    '/user/update-profile': {
+      post: {
+        tags: ['User Management'],
+        summary: 'Update the profile of the authenticated user',
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  firstName: { type: 'string', example: 'John' },
+                  lastName: { type: 'string', example: 'Doe' },
+                  email: { type: 'string', format: 'email', example: 'john.doe@example.com' }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'Profile updated successfully',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/UserObject' }
+              }
+            }
+          },
+          401: {
+            description: 'Unauthorized access',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/ErrorResponse' },
+                example: { data: {}, errors: [{ name: 'UnauthorizedErrorType', description: 'Unauthorized access' }] }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    '/user/toggle-user': {
+      post: {
+        tags: ['User Management'],
+        summary: 'Toggle the active status of a user',
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['userId', 'isActive'],
+                properties: {
+                  userId: { type: 'string', example: '1' },
+                  isActive: { type: 'boolean', example: true }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'User status toggled successfully',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/UserObject' }
+              }
+            }
+          },
+          401: {
+            description: 'Unauthorized access',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/ErrorResponse' },
+                example: { data: {}, errors: [{ name: 'UnauthorizedErrorType', description: 'Unauthorized access' }] }
+              }
+            }
+          },
+          404: {
+            description: 'User not found',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/ErrorResponse' },
+                example: { data: {}, errors: [{ name: 'UserNotFoundErrorType', description: 'User not found' }] }
               }
             }
           }
