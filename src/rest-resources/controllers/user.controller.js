@@ -7,6 +7,8 @@ import { ForgotPasswordService } from '@src/services/user/forgotPassword.service
 import { ResetPasswordService } from '@src/services/user/resetPassword.service'
 import { SendEmailOtpService } from '@src/services/user/sendEmailOtp.service'
 import { VerifyEmailOtpService } from '@src/services/user/verifyEmailOtp.service'
+import { ToggleUserService } from '@src/services/user/toogleUser.service'
+import { UpdateUserService } from '@src/services/user/updateUser.service'
 export class UserController {
   /**
   * @param {import('express').Request} req
@@ -89,6 +91,24 @@ export class UserController {
   static async getUsers (req, res, next) {
     try {
       const result = await GetUsersService.execute({ ...req.query }, req.context)
+      decorateResponse({ req, res, next }, result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async updateProfile (req, res, next) {
+    try {
+      const result = await UpdateUserService.execute({ ...req.body, image: req.file, ...req.authenticated }, req.context)
+      decorateResponse({ req, res, next }, result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async toggleUser (req, res, next) {
+    try {
+      const result = await ToggleUserService.execute({ ...req.body, ...req.authenticated }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)

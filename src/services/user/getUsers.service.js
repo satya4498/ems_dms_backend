@@ -27,7 +27,8 @@ export class GetUsersService extends ServiceBase {
         where[Op.or] = [
           { '$user.first_name$': { [Op.iLike]: `%${search}%` } },
           { '$user.last_name$': { [Op.iLike]: `%${search}%` } },
-          { '$user.phone$': { [Op.iLike]: `%${search}%` } }
+          { '$user.phone$': { [Op.iLike]: `%${search}%` } },
+          { '$user.email$': { [Op.iLike]: `%${search}%` } }
         ]
       }
       const { rows, count } = await this.context.sequelize.models.user.findAndCountAll({
