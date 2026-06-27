@@ -11,12 +11,9 @@ const resend = new Resend(appConfig.resend.apiKey)
  * @returns {Promise<boolean>}
  */
 export async function sendEmailViaResend (email, name, subject, htmlTemplate) {
-  const isDev = appConfig.env === 'development'
-  const toEmail = isDev ? 'freelancer.8510@gmail.com' : email
-
   const { error } = await resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: [toEmail],
+    from: `${appConfig.resend.senderName} <${appConfig.resend.senderEmail}>`,
+    to: [email],
     subject,
     html: htmlTemplate
   })
