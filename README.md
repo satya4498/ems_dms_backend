@@ -2,7 +2,7 @@
 # dms_backend
 =======
 
-# Jagdamba
+# EaseMySaas DMS
 
 This is our Node.js base project serves as a robust foundation for developing scalable and efficient web applications. With a focus on performance and modularity, it provides essential tools and architecture, empowering developers to rapidly create and deploy feature-rich web solutions.
 ## Installation
