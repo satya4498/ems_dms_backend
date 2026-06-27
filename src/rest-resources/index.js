@@ -4,14 +4,16 @@ import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import swaggerUi from 'swagger-ui-express'
 import { errorHandlerMiddleware } from './middlewares/errorHandler.middleware'
 import { appConfig } from '@src/configs'
 import { contextMiddleware } from '@src/rest-resources/middlewares/context.middleware'
 import routes from '@src/rest-resources/routes'
+import { swaggerSpec } from '@src/configs/swagger.config'
 
 const app = express()
 
-app.use(helmet())
+app.use(helmet({ contentSecurityPolicy: false }))
 
 app.use(bodyParser.json())
 
@@ -24,6 +26,8 @@ app.use(cors({
   origin: appConfig.cors,
   credentials: true
 }))
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.use(contextMiddleware)
 

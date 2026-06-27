@@ -79,5 +79,10 @@ export const appConfig = {
     keyId: config.get('razorpayX.keyId'),
     keySecret: config.get('razorpayX.keySecret'),
     accountNumber: config.get('razorpayX.accountNumber')
+  },
+  resend: {
+    apiKey: config.get('resend.apiKey'),
+    senderEmail: config.get('resend.senderEmail'),
+    senderName: config.get('resend.senderName')
   }
 }

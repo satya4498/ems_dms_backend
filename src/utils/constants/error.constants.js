@@ -75,7 +75,8 @@ const messages = {
   REDEMPTION_ALREADY_APPROVED: 'Redemption has already been approved for this QR code',
   REDEMPTION_REJECTED: 'Redemption has been rejected for this QR code',
   CONTACT_ALREADY_EXISTS: 'User already has a Razorpay contact',
-  QR_CODE_NOT_SCANNED: 'QR code must be scanned first before requesting redemption'
+  QR_CODE_NOT_SCANNED: 'QR code must be scanned first before requesting redemption',
+  EMAIL_ALREADY_VERIFIED: 'Email is already verified'
 }
 
 export const errorTypes = {
@@ -547,6 +548,13 @@ export const errorTypes = {
     isOperational: true,
     description: messages.QR_CODE_NOT_SCANNED,
     erroCode: 3072
+  },
+  EmailAlreadyVerifiedErrorType: {
+    name: 'EmailAlreadyVerifiedErrorType',
+    statusCode: StatusCodes.BAD_REQUEST,
+    isOperational: true,
+    description: messages.EMAIL_ALREADY_VERIFIED,
+    errorCode: 3073
   },
   UserNotFoundErrorType: {
     name: 'UserNotFoundErrorType',
