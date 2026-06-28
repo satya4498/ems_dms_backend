@@ -181,6 +181,12 @@ const config = convict({
       format: Boolean,
       default: true,
       env: 'DB_LOGGING'
+    },
+    ssl: {
+      doc: 'Enable SSL for PostgreSQL (required for Render external URLs)',
+      format: Boolean,
+      default: false,
+      env: 'DB_SSL'
     }
   },
 
@@ -266,6 +272,12 @@ const config = convict({
       default: '',
       env: 'REDIS_DB_PASSWORD'
     },
+    username: {
+      doc: 'Redis DB username (required for Render Key Value)',
+      format: String,
+      default: '',
+      env: 'REDIS_DB_USERNAME'
+    },
     host: {
       doc: 'Redis DB host',
       format: String,
@@ -277,6 +289,12 @@ const config = convict({
       format: 'port',
       default: 6379,
       env: 'REDIS_DB_PORT'
+    },
+    tls: {
+      doc: 'Enable TLS for Redis (required for Render rediss:// URLs)',
+      format: Boolean,
+      default: false,
+      env: 'REDIS_DB_TLS'
     }
   },
 
@@ -403,6 +421,26 @@ const config = convict({
       format: String,
       default: '',
       env: 'RAZORPAYX_ACCOUNT_NUMBER'
+    }
+  },
+  resend: {
+    apiKey: {
+      doc: 'Resend API key',
+      format: String,
+      default: '',
+      env: 'RESEND_API_KEY'
+    },
+    senderEmail: {
+      doc: 'Resend sender email',
+      format: String,
+      default: 'onboarding@resend.dev',
+      env: 'RESEND_SENDER_EMAIL'
+    },
+    senderName: {
+      doc: 'Resend sender name',
+      format: String,
+      default: 'DMS',
+      env: 'RESEND_SENDER_NAME'
     }
   }
 })

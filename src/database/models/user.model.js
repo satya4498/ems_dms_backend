@@ -1,4 +1,4 @@
-import { USER_GENDER, USER_ROLE } from '@src/utils/constants/public.constants.utils'
+import { USER_GENDER, USER_ROLE, BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
 import { DataTypes } from 'sequelize'
 import ModelBase from './modelBase.model'
 
@@ -60,6 +60,11 @@ export default class User extends ModelBase {
       type: DataTypes.BOOLEAN,
       allowNull: true
     },
+    emailVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     dateOfBirth: {
       type: DataTypes.DATE,
       allowNull: true
@@ -101,6 +106,10 @@ export default class User extends ModelBase {
       type: DataTypes.STRING,
       allowNull: true
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -126,6 +135,10 @@ export default class User extends ModelBase {
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    businessType: {
+      type: DataTypes.ENUM(Object.values(BUSINESS_TYPES)),
       allowNull: true
     },
     createdAt: {
