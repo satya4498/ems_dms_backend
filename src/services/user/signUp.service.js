@@ -5,6 +5,7 @@ import { JWT_TOKEN_TYPES } from '@src/utils/constants/app.constants'
 import ajv from '@src/libs/ajv'
 import bcrypt from 'bcrypt'
 import Jwt from 'jsonwebtoken'
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
 
 const constraints = ajv.compile({
   type: 'object',
@@ -14,7 +15,8 @@ const constraints = ajv.compile({
     email: { type: 'string' },
     password: { type: 'string' },
     phone: { type: 'string' },
-    phoneCode: { type: 'string' }
+    phoneCode: { type: 'string' },
+    businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
   },
   required: ['email', 'password']
 })
@@ -26,7 +28,7 @@ export class SignUpService extends ServiceBase {
 
   async run () {
     try {
-      const { firstName, lastName, email, password, phone, phoneCode } = this.args
+      const { firstName, lastName, email, password, phone, phoneCode, businessType } = this.args
 
       const existingUser = await this.context.sequelize.models.user.findOne({
         where: { email }
@@ -48,7 +50,8 @@ export class SignUpService extends ServiceBase {
         email,
         password: hashedPassword,
         phone: phone || null,
-        phoneCode: phoneCode || null
+        phoneCode: phoneCode || null,
+        businessType: businessType || null
       })
 
       const tokenPayload = {
@@ -73,7 +76,8 @@ export class SignUpService extends ServiceBase {
           email: user.email,
           phone: user.phone,
           phoneCode: user.phoneCode,
-          role: user.role
+          role: user.role,
+          businessType: user.businessType
         },
         accessToken
       }

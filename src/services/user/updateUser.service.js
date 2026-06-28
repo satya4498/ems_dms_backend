@@ -1,6 +1,7 @@
 import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
 
 const constraints = ajv.compile({
   type: 'object',
@@ -10,7 +11,8 @@ const constraints = ajv.compile({
     lastName: { type: 'string' },
     email: { type: 'string', format: 'email' },
     phoneCode: { type: 'string' },
-    phone: { type: 'string' }
+    phone: { type: 'string' },
+    businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
   },
   required: ['userId']
 })
@@ -22,7 +24,7 @@ export class UpdateUserService extends ServiceBase {
 
   async run () {
     try {
-      const { userId, firstName, lastName, email, phoneCode, phone } = this.args
+      const { userId, firstName, lastName, email, phoneCode, phone, businessType } = this.args
       const { sequelize:{ models } } = this.context
 
       const user = await models.user.findOne({
@@ -36,7 +38,7 @@ export class UpdateUserService extends ServiceBase {
       if (email !== undefined) user.email = email
       if (phoneCode !== undefined) user.phoneCode = phoneCode
       if (phone !== undefined) user.phone = phone
-
+      if (businessType) user.businessType = businessType
       await user.save()
 
       return user
