@@ -25,6 +25,7 @@ export const getProfileSchema = {
         description: { type: 'string', maxLength: 500 },
         role: { type: 'string' },
         isActive: { type: 'boolean' },
+        businessType: { type: 'string' },
         createdAt: { type: 'string' },
         updatedAt: { type: 'string' }
       }

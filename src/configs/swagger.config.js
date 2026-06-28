@@ -1,3 +1,5 @@
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
+
 export const swaggerSpec = {
   openapi: '3.0.0',
   info: {
@@ -74,7 +76,8 @@ export const swaggerSpec = {
                   firstName: { type: 'string', example: 'John' },
                   lastName: { type: 'string', example: 'Doe' },
                   phone: { type: 'string', example: '9876543210' },
-                  phoneCode: { type: 'string', example: '+91' }
+                  phoneCode: { type: 'string', example: '+91' },
+                  businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
                 }
               }
             }
@@ -533,7 +536,10 @@ export const swaggerSpec = {
                 properties: {
                   firstName: { type: 'string', example: 'John' },
                   lastName: { type: 'string', example: 'Doe' },
-                  email: { type: 'string', format: 'email', example: 'john.doe@example.com' }
+                  email: { type: 'string', format: 'email', example: 'john.doe@example.com' },
+                  phoneCode: { type: 'string', example: '+91' },
+                  phone: { type: 'string', example: '9876543210' },
+                  businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
                 }
               }
             }

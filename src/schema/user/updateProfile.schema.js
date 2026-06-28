@@ -1,3 +1,5 @@
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
+
 export const updateProfileSchema = {
   body: {
     type: 'object',
@@ -62,7 +64,8 @@ export const updateProfileSchema = {
         minLength: 10,
         maxLength: 15
       },
-      userId: { type: 'string' }
+      userId: { type: 'string' },
+      businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
     },
     additionalProperties: false
   },
@@ -97,6 +100,7 @@ export const updateProfileSchema = {
                 role: { type: 'string' },
                 description: { type: 'string' },
                 isActive: { type: 'boolean' },
+                businessType: { type: 'string' },
                 createdAt: { type: 'string' },
                 updatedAt: { type: 'string' },
               }

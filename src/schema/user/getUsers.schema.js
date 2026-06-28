@@ -28,6 +28,7 @@ export const getUsersSchema = {
                   phoneCode: { type: 'string' },
                   isActive: { type: 'boolean' },
                   role: { type: 'string' },
+                  businessType: { type: 'string' },
                   createdAt: { type: 'string' },
                   updatedAt: { type: 'string' }
                 }
