@@ -1,10 +1,13 @@
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
+
 export const getUsersSchema = {
   body: {
     type: 'object',
     properties: {
       page: { type: 'number', minimum: 1 },
       limit: { type: 'number', minimum: 1, maximum: 1000 },
-      search: { type: 'string', maxLength: 255 }
+      search: { type: 'string', maxLength: 255 },
+      businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
     },
     additionalProperties: false
   },
@@ -28,7 +31,7 @@ export const getUsersSchema = {
                   phoneCode: { type: 'string' },
                   isActive: { type: 'boolean' },
                   role: { type: 'string' },
-                  businessType: { type: 'string' },
+                  businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) },
                   createdAt: { type: 'string' },
                   updatedAt: { type: 'string' }
                 }
