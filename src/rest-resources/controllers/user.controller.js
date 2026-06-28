@@ -9,6 +9,8 @@ import { SendEmailOtpService } from '@src/services/user/sendEmailOtp.service'
 import { VerifyEmailOtpService } from '@src/services/user/verifyEmailOtp.service'
 import { ToggleUserService } from '@src/services/user/toogleUser.service'
 import { UpdateUserService } from '@src/services/user/updateUser.service'
+import { BulkSignupService } from '@src/services/user/bulkSignup.service'
+
 export class UserController {
   /**
   * @param {import('express').Request} req
@@ -109,6 +111,15 @@ export class UserController {
   static async toggleUser (req, res, next) {
     try {
       const result = await ToggleUserService.execute({ ...req.body, ...req.authenticated }, req.context)
+      decorateResponse({ req, res, next }, result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async bulkSignup (req, res, next) {
+    try {
+      const result = await BulkSignupService.execute({ ...req.body }, req.context)
       decorateResponse({ req, res, next }, result)
     } catch (error) {
       next(error)

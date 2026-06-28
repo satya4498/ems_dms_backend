@@ -2,6 +2,7 @@ import { ServiceBase } from '@src/libs/serviceBase'
 import ajv from '@src/libs/ajv'
 import { APIError } from '@src/errors/api.error'
 import { Op } from 'sequelize'
+import { BUSINESS_TYPES } from '@src/utils/constants/public.constants.utils'
 
 // AJV validation schema
 const getUsersConstraints = ajv.compile({
@@ -9,7 +10,8 @@ const getUsersConstraints = ajv.compile({
   properties: {
     page: { type: 'number', minimum: 1, default: 1 },
     limit: { type: 'number', minimum: 1, maximum: 1000, default: 20 },
-    search: { type: 'string', maxLength: 255 }
+    search: { type: 'string', maxLength: 255 },
+    businessType: { type: 'string', enum: Object.values(BUSINESS_TYPES) }
   }
 })
 
@@ -20,7 +22,7 @@ export class GetUsersService extends ServiceBase {
 
   async run () {
     try {
-      const { page, limit, search = '' } = this.args
+      const { page, limit, search = '', businessType } = this.args
       const offset = (page - 1) * limit
       const where = {}
       if (search) {
@@ -30,6 +32,9 @@ export class GetUsersService extends ServiceBase {
           { '$user.phone$': { [Op.iLike]: `%${search}%` } },
           { '$user.email$': { [Op.iLike]: `%${search}%` } }
         ]
+      }
+      if (businessType) {
+        where.businessType = businessType
       }
       const { rows, count } = await this.context.sequelize.models.user.findAndCountAll({
         where,

@@ -7,6 +7,20 @@ export const swaggerSpec = {
     version: '1.0.0',
     description: 'Document Management System API documentation'
   },
+  security: [
+    {
+      basicAuth: [{
+        type: 'http',
+        scheme: 'basic'
+      }]
+    },
+    {
+      bearerAuth: [{
+        type: 'http',
+        scheme: 'bearer'
+      }]
+    }
+  ],
   servers: [
     {
       url: '/api/v2',
@@ -56,7 +70,8 @@ export const swaggerSpec = {
   tags: [
     { name: 'Auth', description: 'Authentication APIs' },
     { name: 'Email Verification', description: 'Email OTP verification APIs' },
-    { name: 'User Management', description: 'User management APIs' }
+    { name: 'User Management', description: 'User management APIs' },
+    { name: 'Internal', description: 'Internal APIs' }
   ],
   paths: {
     '/user/sign-up': {
@@ -611,6 +626,37 @@ export const swaggerSpec = {
               'application/json': {
                 schema: { $ref: '#/components/schemas/ErrorResponse' },
                 example: { data: {}, errors: [{ name: 'UserNotFoundErrorType', description: 'User not found' }] }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    '/internal/bulk-signup': {
+      post: {
+        tags: ['Internal'],
+        summary: 'Bulk signup users',
+        security: [{ basicAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  users: { type: 'array', items: { type: 'object' } }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'Users signed up successfully',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/UserObject' }
               }
             }
           }
