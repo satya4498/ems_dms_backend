@@ -22,10 +22,14 @@ const commonSetting = {
   },
   dialectOptions: {
     application_name: config.get('app.name'),
-    // ssl: {
-    //   require: true,
-    //   rejectUnauthorized: false
-    // }
+    ...(config.get('db.ssl')
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false
+          }
+        }
+      : {})
   },
   define: {
     underscored: true,
